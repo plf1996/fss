@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/Cesium/Build/Cesium/Widgets/widgets.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/Cesium/Apps/Sandcastle/templates/bucket.css}">
     <script type="text/javascript" th:src="@{/static/Cesium/Apps/Sandcastle/Sandcastle-header.js}"></script>
     <script type="text/javascript" th:src="@{/static/Cesium/Build/CesiumUnminified/Cesium.js}"></script>
+    <script type="text/javascript" th:src="@{/static/Cesium/Build/Cesium/Cesium.js}"></script>
 
 </head>
 <body>
@@ -63,18 +65,19 @@
 </div>
 </body>
 <script>
-    // const viewer = new Cesium.Viewer("cesiumContainer", {
-    //     terrainProvider: Cesium.createWorldTerrain({
-    //         requestVertexNormals: true, //Needed to visualize slope
-    //     }),
-    // });
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-        imageryProvider : new Cesium.TileMapServiceImageryProvider({
-            url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZDY4YmM2YS00YWJhLTRmZTEtOWYzNC01YjNmMDE1MzFmM2UiLCJpZCI6OTA4MTQsImlhdCI6MTY1MDc3MTIzNH0.aqYG80j9c2Muj-9ZiGwEaMIZBzqJhSbCvV3rk1Vl6iQ';
+    const viewer = new Cesium.Viewer("cesiumContainer", {
+        terrainProvider: Cesium.createWorldTerrain({
+            requestVertexNormals: true, //Needed to visualize slope
         }),
-        baseLayerPicker : false,
-        geocoder : false
     });
+    // var viewer = new Cesium.Viewer('cesiumContainer', {
+    //     imageryProvider : new Cesium.TileMapServiceImageryProvider({
+    //         url : Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+    //     }),
+    //     baseLayerPicker : false,
+    //     geocoder : false
+    // });
 
     viewer.camera.setView({
         destination: new Cesium.Cartesian3(
