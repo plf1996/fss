@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<tr th:each="item:${airportList}">
+    <td th:text="${item.airportsId}">2</td>
+    <td th:text="${item.name}">3</td>
+    <td th:text="${item.code}">3</td>
+    <td th:text="${item.lon}">3</td>
+    <td th:text="${item.lat}">3</td>
+    <td th:text="${item.msl}">3</td>
+    <td th:text="${item.type}">3</td>
+</tr>
 </body>
 </html>

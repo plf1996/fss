@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: '123456'
-    url: jdbc:mysql://localhost:3306/fss/useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/fss?useUnicode=true&characterEncoding=utf8
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -14,3 +14,9 @@ spring:
     servlet:
       content-type: text/html
     mode: HTML
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.kg.fss.entity
+logging:
+  level:
+    com.kg.fss.dao: debug

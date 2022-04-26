@@ -1,25 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
         body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
     </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.easyui.min.js}"></script>
     <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=640s3G8ZqzBCdwWwKGSnhzYkYGzRIX6S"></script>
-    <title>地球模式</title>
+    <title>FSS选址系统</title>
+
 </head>
 <body>
 <div id="allmap" style="width: 70%;float: right"></div>
 <div id="sys" style="width: 30%;">
    <p><H1>FSS选址系统主页</H1></p>
+    <H1 th:text="${test}"></H1>
+<table id="td">
+    <thead>
+    <tr>
+
+        <th>name</th>
+        <th >code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--<tr th:each="item: ${airportList}">-->
+
+        <!--<td th:text="${item.name}">name</td>-->
+        <!--<td th:text="${item.code}">code</td>-->
+    <!--</tr>-->
+    </tbody>
+</table>
+    <a href="javascript:loadAirportData()" class="easyui-linkbutton" iconCls="icon-add">加载数据</a>
+
 </div>
 </body>
+
 </html>
 <script type="text/javascript">
+
+    var y=30.558257;
+    var x=103.945966;
+
+    var ggPoint = new BMapGL.Point(x,y)
     // GL版命名空间为BMapGL
     var map = new BMapGL.Map("allmap");    // 创建Map实例
-    map.centerAndZoom('成都市', 12);  // 初始化地图,设置中心点坐标和地图级别
+    map.centerAndZoom('成都市', 10);  // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
     map.setMapType(BMAP_EARTH_MAP);      // 设置地图类型为地球模式
+    var cityCtrl = new BMapGL.CityListControl();  // 添加城市列表控件
+    map.addControl(cityCtrl);
+    map.setMapStyleV2({
+        styleId: '8ec900b0cc95428350b999157a191d97'
+    });
+
+
+    var large_airport_icon = new BMapGL.Icon("../static/image/large_airport.png",new BMapGL.Size(32,32));
+
+    translateCallback = function (data){
+        if(data.status === 0) {
+            var marker = new BMapGL.Marker(data.points[0],{
+                icon:large_airport_icon
+            });
+            map.addOverlay(marker);
+            var label = new BMapGL.Label("双流机场",{offset:new BMapGL.Size(20,-10)});
+            marker.setLabel(label); //添加百度label
+            map.setCenter(data.points[0]);
+        }
+    }
+
+
+
+    setTimeout(function(){
+        var convertor = new BMapGL.Convertor();
+        var pointArr = [];
+        pointArr.push(ggPoint);
+        convertor.translate(pointArr, 1, 5, translateCallback)
+    }, 1000);
+
+
+
+    function loadAirportData() {
+        $.ajax({
+            url:'/airport/all',
+            type:'get',
+            datatype:"json",
+            async:"false",
+            success:function(result){
+                console.log(result);
+                
+            }});
+    }
 </script>
+
