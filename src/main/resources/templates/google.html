@@ -1,0 +1,28 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>google Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style>
+        #map {
+            height: 400px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/google/css/google.css}" />
+    <script type="module" th:src="@{/static/google/js/google.js}"></script>
+</head>
+<body>
+<h3>My Google Maps Demo</h3>
+<!--The div element for the map -->
+<div id="map"></div>
+
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+        defer
+></script>
+
+
+</body>
+</html>

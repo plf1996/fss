@@ -19,6 +19,7 @@
 <div id="sys" style="width: 30%;">
    <p><H1>FSS选址系统主页</H1></p>
     <H1 th:text="${test}"></H1>
+    <a href="javascript:loadAirportData()" class="easyui-linkbutton" iconCls="icon-add">加载数据</a>
 <table id="td">
     <thead>
     <tr>
@@ -28,14 +29,14 @@
     </tr>
     </thead>
     <tbody>
-    <!--<tr th:each="item: ${airportList}">-->
+    <tr th:each="item: ${airportList}">
 
-        <!--<td th:text="${item.name}">name</td>-->
-        <!--<td th:text="${item.code}">code</td>-->
-    <!--</tr>-->
+        <td th:text="${item.name}">name</td>
+        <td th:text="${item.code}">code</td>
+    </tr>
     </tbody>
 </table>
-    <a href="javascript:loadAirportData()" class="easyui-linkbutton" iconCls="icon-add">加载数据</a>
+
 
 </div>
 </body>

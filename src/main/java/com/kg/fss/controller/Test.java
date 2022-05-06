@@ -18,4 +18,14 @@ public class Test {
     public String hello(){
         return "HelloWorld";
     }
+
+    @RequestMapping("/google")
+    public String testgoogle(){
+        return "google";
+    }
+
+    @RequestMapping("/tiandi")
+    public String testtiandi(){
+        return "tiandi";
+    }
 }
