@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>商品销售管理系统后台登录页面</title>
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/md5.js}"></script>
+    <SCRIPT type="text/javascript">
+
+        window.onload = function () {
+            $("#error").html("");
+            //定义存储4位数随机验证码的变量
+            var code;
+            //函数，执行验证码的生成过程
+            createCode();
+        }
+        function removeError() {
+            $("#error").html("");
+        }
+        function createCode() {
+            //把上面的存储随机验证码的变量进行赋值
+            code = "";
+            //验证码的固定长度
+            var codeLength = 4;
+            var checkCode = document.getElementById("ma");
+            var codeChars = new Array(0,1,2,3,4,5,6,7,8,9,
+                "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+                "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+            for (var i = 0;i < codeLength; i++){
+                //Math.floor取整数
+                //Math.random随机生成0-1之间的小数
+                var charNum = Math.floor(Math.random()*52);
+                code += codeChars[charNum];
+            }
+            if (checkCode){//元素节点是否存在
+                checkCode.innerHTML = code;
+
+            }
+        }
+
+
+        $(function(){
+            //得到焦点
+            $("#pwd").focus(function(){
+                $("#left_hand").animate({
+                    left: "150",
+                    top: " -38"
+                },{step: function(){
+                        if(parseInt($("#left_hand").css("left"))>140){
+                            $("#left_hand").attr("class","left_hand");
+                        }
+                    }}, 2000);
+                $("#right_hand").animate({
+                    right: "-64",
+                    top: "-38px"
+                },{step: function(){
+                        if(parseInt($("#right_hand").css("right"))> -70){
+                            $("#right_hand").attr("class","right_hand");
+                        }
+                    }}, 2000);
+            });
+            //失去焦点
+            $("#pwd").blur(function(){
+                $("#left_hand").attr("class","initial_left_hand");
+                $("#left_hand").attr("style","left:100px;top:-12px;");
+                $("#right_hand").attr("class","initial_right_hand");
+                $("#right_hand").attr("style","right:-112px;top:-12px");
+            });
+        });
+
+        function checkForm(){
+            var userName=$("#userName").val();
+            var pwd=$("#pwd").val();
+            var inputCodeValue = $("#yanzhengma").val();
+            if(inputCodeValue.toUpperCase() != code.toUpperCase()){
+                $("#error").html("验证码错误！");
+                return false;
+            }
+            if(userName==null||userName==""){
+                $("#error").html("用户名不能为空！");
+                return false;
+            }
+            if(pwd==null||pwd==""){
+                $("#error").html("密码不能为空！");
+                return false;
+            }else {
+                var hash = hex_md5(pwd);
+
+                $("#pwd").val(hash);
+            }
+
+
+            return true;
+        }
+    </SCRIPT>
+</head>
+<body>
+<DIV class="top_div" >
+    <p style="text-align: center;top: 50%;">
+        <span><font size="10";color="#7fff00">欢迎使用Fss机场寻址系统</font>></span>
+    </p>
+</DIV>
+<form action="/userlogin" method="post" onsubmit="return checkForm()">
+    <DIV style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 260px; text-align: center;">
+        <DIV style="width: 165px; height: 96px; position: absolute;">
+            <DIV class="tou">
+            </DIV>
+            <DIV class="initial_left_hand" id="left_hand">
+            </DIV>
+            <DIV class="initial_right_hand" id="right_hand">
+            </DIV>
+        </DIV>
+        <P style="padding: 30px 0px 10px; position: relative;">
+            <SPAN class="u_logo"></SPAN>
+            <INPUT id="userName" name="userName" class="ipt" type="text" placeholder="请输入用户名"  >
+        </P>
+        <P style="position: relative;">
+            <SPAN class="p_logo"></SPAN>
+            <INPUT id="pwd" name="pwd" class="ipt"  type="password" placeholder="请输入密码" >
+        </P>
+
+        <P style="padding: 10px 0px 10px; position: relative;">
+            <input id="yanzhengma" type="text"  class="ipt"  style="width: 223px" placeholder="请输入验证码" >
+            <a href="#" onclick="createCode()" style="color:black;"><span id="ma" onclick="removeError()"></span>&nbsp;换一张</a>
+        </P>
+
+
+        <DIV style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
+            <P style="margin: 0px 35px 20px 45px;">
+                <span><font color="red" id="error">${errorMsg}</font></span>
+                <SPAN style="float: right;">
+	              <input type="submit" style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" value="登录"/>
+	         </SPAN>
+            </P>
+        </DIV>
+    </DIV>
+</form>
+
+</body>
+</html>

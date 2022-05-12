@@ -11,6 +11,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/default/easyui.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/icon.css}">
+    <script type="text/javascript" src="http://api.tianditu.gov.cn/api?v=4.0&tk=43f240f0c7548fa36e55fb6b2354b695"></script>
     <script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/easyui/jquery.easyui.min.js}"></script>
     <script type="text/javascript" cesium="true" th:src="@{/static/cesium1.58/Cesium.js}"></script>
@@ -39,11 +40,12 @@
         }
     </style>
 </head>
-<body>
+<body >
 <div id="cesiumContainer" style="float: right;width:70%;height: 100%;"></div>
-<div id="sys" style="float: left;width:30%;height: 100%;">
+<div id="sys" style="float: left;width:30%;height: 50%;">
     <p>sys选址系统首页</p>
-    <a href="javascript:loadAirportData()" class="easyui-linkbutton" iconCls="icon-add">加载数据</a>
+    <a href="javascript:loadAirportData()" class="easyui-linkbutton" iconCls="icon-add">加载机场数据</a>
+    <a href="javascript:removeAirportData()" class="easyui-linkbutton" iconCls="icon-undo">移除机场数据</a>
 </div>
 <script>
     var token = '43f240f0c7548fa36e55fb6b2354b695';
@@ -134,7 +136,8 @@
 
     // 将三维球定位到中国
     viewer.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(103.84, 31.15, 17850000),
+        // destination: Cesium.Cartesian3.fromDegrees(103.84, 31.15, 17850000),
+        destination: Cesium.Cartesian3.fromDegrees(103, 30, 1249500),
         orientation: {
             heading :  Cesium.Math.toRadians(348.4202942851978),
             pitch : Cesium.Math.toRadians(-89.74026687972041),
@@ -142,6 +145,8 @@
         },
         complete:function callback() {
             // 定位完成之后的回调函数
+
+
         }
     });
 
@@ -210,15 +215,8 @@
 
     wtfs.initTDT([{"x":6,"y":1,"level":2,"boundBox":{"minX":90,"minY":0,"maxX":135,"maxY":45}},{"x":7,"y":1,"level":2,"boundBox":{"minX":135,"minY":0,"maxX":180,"maxY":45}},{"x":6,"y":0,"level":2,"boundBox":{"minX":90,"minY":45,"maxX":135,"maxY":90}},{"x":7,"y":0,"level":2,"boundBox":{"minX":135,"minY":45,"maxX":180,"maxY":90}},{"x":5,"y":1,"level":2,"boundBox":{"minX":45,"minY":0,"maxX":90,"maxY":45}},{"x":4,"y":1,"level":2,"boundBox":{"minX":0,"minY":0,"maxX":45,"maxY":45}},{"x":5,"y":0,"level":2,"boundBox":{"minX":45,"minY":45,"maxX":90,"maxY":90}},{"x":4,"y":0,"level":2,"boundBox":{"minX":0,"minY":45,"maxX":45,"maxY":90}},{"x":6,"y":2,"level":2,"boundBox":{"minX":90,"minY":-45,"maxX":135,"maxY":0}},{"x":6,"y":3,"level":2,"boundBox":{"minX":90,"minY":-90,"maxX":135,"maxY":-45}},{"x":7,"y":2,"level":2,"boundBox":{"minX":135,"minY":-45,"maxX":180,"maxY":0}},{"x":5,"y":2,"level":2,"boundBox":{"minX":45,"minY":-45,"maxX":90,"maxY":0}},{"x":4,"y":2,"level":2,"boundBox":{"minX":0,"minY":-45,"maxX":45,"maxY":0}},{"x":3,"y":1,"level":2,"boundBox":{"minX":-45,"minY":0,"maxX":0,"maxY":45}},{"x":3,"y":0,"level":2,"boundBox":{"minX":-45,"minY":45,"maxX":0,"maxY":90}},{"x":2,"y":0,"level":2,"boundBox":{"minX":-90,"minY":45,"maxX":-45,"maxY":90}},{"x":0,"y":1,"level":2,"boundBox":{"minX":-180,"minY":0,"maxX":-135,"maxY":45}},{"x":1,"y":0,"level":2,"boundBox":{"minX":-135,"minY":45,"maxX":-90,"maxY":90}},{"x":0,"y":0,"level":2,"boundBox":{"minX":-180,"minY":45,"maxX":-135,"maxY":90}}]);
 
-    //添加marker
-    var icon = new T.Icon({
-        iconUrl:"../static/image/large_airport.png",
-        iconSize: new T.point(19,27),
-        iconAnchor:new T.point(10,25)
-    });
-    var slLngLat = new T.LngLat(103.945966,30.558257);
-    var marker = new T.Marker(slLngLat,{icon:icon});
-    viewer.addOverlay(marker);
+
+
 
 
     function loadAirportData() {
@@ -228,9 +226,45 @@
             datatype:"json",
             async:"false",
             success:function(result){
-                console.log(result);
+                for (var item in result){
+                    var entity = new Cesium.Entity({
+                        id:result[item].airportsId,
+                        name:result[item].name,
+                        show:true,
+                        position:Cesium.Cartesian3.fromDegrees(result[item].lat,result[item].lon),
+                        point:new Cesium.PointGraphics({
+                            show:false,
+                            pixelSize :  5,
+                            heightReference :  Cesium.HeightReference.NONE,
+                            color : new Cesium.Color ( 255 , 255 , 0 , 1 ),
+                            outlineColor : new Cesium.Color ( 0 , 0 , 0 , 0 ),
+                            outlineWidth : 1,
+                            scaleByDistance : new Cesium.NearFarScalar ( 0 , 1 , 5e10 , 1 ),
+                            translucencyByDistance : new Cesium.NearFarScalar ( 0 , 1 , 5e10 , 1 ),
+                            distanceDisplayCondition :  new Cesium.DistanceDisplayCondition(0, 4.8e10),
 
+                        }),
+                        label:{
+                            text:result[item].name,
+                            font: '10pt monospace',
+                            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                            outlineWidth : 1,
+                            verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
+                            pixelOffset : new Cesium.Cartesian2(0, -9),
+                        },
+                        billboard:{
+                            image:"../static/image/junyong.png",
+                            width:32,
+                            height:32,
+                        },
+                    });
+                    viewer.entities.add(entity);
+                }
             }});
+    }
+
+    function removeAirportData(){
+        viewer.entities.removeAll();
     }
 </script>
 </body>

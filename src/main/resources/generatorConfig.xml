@@ -78,7 +78,7 @@
             <!--&lt;!&ndash;区分大小写，与数据库保持一致&ndash;&gt;-->
             <!--<property name= "useActualColumnNames" value= "true"/>-->
         <!--</table>-->
-        <table tableName="airports" domainObjectName="Airport"
+        <table tableName="user" domainObjectName="User"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
