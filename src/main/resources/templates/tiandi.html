@@ -46,6 +46,25 @@
     <p>sys选址系统首页</p>
     <a href="javascript:loadAirportData()" class="easyui-linkbutton" iconCls="icon-add">加载机场数据</a>
     <a href="javascript:removeAirportData()" class="easyui-linkbutton" iconCls="icon-undo">移除机场数据</a>
+    <!-- class="easyui-datagrid"-->
+    <table id="airportsdg" title="机场数据信息" style="width:100%;height:100%" data-options="
+				rownumbers:true,
+				singleSelect:true,
+				autoRowHeight:false,
+				pagination:true,
+				pageSize:10">
+        <thead>
+        <tr>
+            <th field="name" width="80" align="center">机场名称</th>
+            <th field="code" width="100" align="center">机场代码</th>
+            <th field="lon" width="80" align="center">经度</th>
+            <th field="lat" width="80" align="center">纬度</th>
+            <th field="msl" width="80" align="center">标高</th>
+            <th field="type" width="100" align="center">类型</th>
+        </tr>
+        </thead>
+        <tbody id="airportsbody"></tbody>
+    </table>
 </div>
 <script>
     var token = '43f240f0c7548fa36e55fb6b2354b695';
@@ -216,7 +235,9 @@
     wtfs.initTDT([{"x":6,"y":1,"level":2,"boundBox":{"minX":90,"minY":0,"maxX":135,"maxY":45}},{"x":7,"y":1,"level":2,"boundBox":{"minX":135,"minY":0,"maxX":180,"maxY":45}},{"x":6,"y":0,"level":2,"boundBox":{"minX":90,"minY":45,"maxX":135,"maxY":90}},{"x":7,"y":0,"level":2,"boundBox":{"minX":135,"minY":45,"maxX":180,"maxY":90}},{"x":5,"y":1,"level":2,"boundBox":{"minX":45,"minY":0,"maxX":90,"maxY":45}},{"x":4,"y":1,"level":2,"boundBox":{"minX":0,"minY":0,"maxX":45,"maxY":45}},{"x":5,"y":0,"level":2,"boundBox":{"minX":45,"minY":45,"maxX":90,"maxY":90}},{"x":4,"y":0,"level":2,"boundBox":{"minX":0,"minY":45,"maxX":45,"maxY":90}},{"x":6,"y":2,"level":2,"boundBox":{"minX":90,"minY":-45,"maxX":135,"maxY":0}},{"x":6,"y":3,"level":2,"boundBox":{"minX":90,"minY":-90,"maxX":135,"maxY":-45}},{"x":7,"y":2,"level":2,"boundBox":{"minX":135,"minY":-45,"maxX":180,"maxY":0}},{"x":5,"y":2,"level":2,"boundBox":{"minX":45,"minY":-45,"maxX":90,"maxY":0}},{"x":4,"y":2,"level":2,"boundBox":{"minX":0,"minY":-45,"maxX":45,"maxY":0}},{"x":3,"y":1,"level":2,"boundBox":{"minX":-45,"minY":0,"maxX":0,"maxY":45}},{"x":3,"y":0,"level":2,"boundBox":{"minX":-45,"minY":45,"maxX":0,"maxY":90}},{"x":2,"y":0,"level":2,"boundBox":{"minX":-90,"minY":45,"maxX":-45,"maxY":90}},{"x":0,"y":1,"level":2,"boundBox":{"minX":-180,"minY":0,"maxX":-135,"maxY":45}},{"x":1,"y":0,"level":2,"boundBox":{"minX":-135,"minY":45,"maxX":-90,"maxY":90}},{"x":0,"y":0,"level":2,"boundBox":{"minX":-180,"minY":45,"maxX":-135,"maxY":90}}]);
 
 
+function loadAirportDataInhtml() {
 
+}
 
 
     function loadAirportData() {
@@ -226,7 +247,17 @@
             datatype:"json",
             async:"false",
             success:function(result){
+                var str = "";
+                var tbody = window.document.getElementById("airportsbody");
                 for (var item in result){
+                    str += "<tr>" +
+                        "<td>" + result[item].name + "</td>" +
+                        "<td>" + result[item].code + "</td>" +
+                        "<td>" + result[item].lon + "</td>" +
+                        "<td>" + result[item].lat + "</td>" +
+                        "<td>" + result[item].msl + "</td>" +
+                        "<td>" + result[item].type + "</td>" +
+                        "</tr>";
                     var entity = new Cesium.Entity({
                         id:result[item].airportsId,
                         name:result[item].name,
@@ -254,18 +285,52 @@
                         },
                         billboard:{
                             image:"../static/image/junyong.png",
-                            width:32,
-                            height:32,
+                            width:16,
+                            height:16,
                         },
                     });
                     viewer.entities.add(entity);
                 }
+                tbody.innerHTML = str;
             }});
     }
 
     function removeAirportData(){
         viewer.entities.removeAll();
     }
+
+    function pagerFilter(data){
+        if (typeof data.length == 'number' && typeof data.splice == 'function'){	// is array
+            data = {
+                total: data.length,
+                rows: data
+            }
+        }
+        var dg = $(this);
+        var opts = dg.datagrid('options');
+        var pager = dg.datagrid('getPager');
+        pager.pagination({
+            onSelectPage:function(pageNum, pageSize){
+                opts.pageNumber = pageNum;
+                opts.pageSize = pageSize;
+                pager.pagination('refresh',{
+                    pageNumber:pageNum,
+                    pageSize:pageSize
+                });
+                dg.datagrid('loadData',data);
+            }
+        });
+        if (!data.originalRows){
+            data.originalRows = (data.rows);
+        }
+        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+        var end = start + parseInt(opts.pageSize);
+        data.rows = (data.originalRows.slice(start, end));
+        return data;
+    }
+    
+    
+
 </script>
 </body>
 </html>
