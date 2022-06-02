@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.easyui.min.js}"></script>
+</head>
+</head>
+<body>
+<div id="navStationContent" data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+    <a href="javascript:top.loadnavStationData()" class="easyui-linkbutton" iconCls="icon-add">加载导航台数据</a>
+    <a href="javascript:top.removenavStationData()" class="easyui-linkbutton" iconCls="icon-undo">移除导航台数据</a>
+    <!-- class="easyui-datagrid"-->
+    <table id="airportsdg" title="导航台数据信息" style="width:100%;height:100%" data-options="
+				rownumbers:true,
+				singleSelect:true,
+				autoRowHeight:false,
+				pagination:true,
+				pageSize:10">
+        <thead>
+        <tr>
+            <th field="stationName" width="150" align="center">导航台名称</th>
+            <th field="navlon" width="80" align="center">导航台经度</th>
+            <th field="navlat" width="80" align="center">导航台纬度经度</th>
+            <th field="navtype" width="80" align="center">导航台类型</th>
+        </tr>
+        </thead>
+        <tbody id="navStationbody"></tbody>
+    </table>
+
+</body>
+</html>

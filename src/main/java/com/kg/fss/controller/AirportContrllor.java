@@ -2,7 +2,6 @@ package com.kg.fss.controller;
 
 import com.kg.fss.entity.Airport;
 import com.kg.fss.service.AirportService;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

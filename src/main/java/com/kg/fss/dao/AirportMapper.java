@@ -2,7 +2,6 @@ package com.kg.fss.dao;
 
 import com.kg.fss.entity.Airport;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
 @Mapper

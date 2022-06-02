@@ -28,4 +28,35 @@ public class Test {
     public String testtiandi(){
         return "tiandi";
     }
+
+    @RequestMapping("/airportManage")
+    public String airportMange(){
+        return "airportManage";
+    }
+
+    @RequestMapping("/navigationStation")
+    public String navigationStation(){
+        return "navigationStation";
+    }
+
+    @RequestMapping("/restrictedArea")
+    public String restrictedArea(){
+        return "restrictedArea";
+    }
+
+    @RequestMapping("/siteSelection")
+    public String siteSelection(){
+        return "siteSelection";
+    }
+
+    @RequestMapping("serviceCoverage")
+    public String serviceCoverage(){
+        return "serviceCoverage";
+    }
+
+    @RequestMapping("/siteCost")
+    public String siteCost(){
+        return "siteCost";
+    }
+
 }

@@ -41,31 +41,32 @@
     </style>
 </head>
 <body >
-<div id="cesiumContainer" style="float: right;width:70%;height: 100%;"></div>
-<div id="sys" style="float: left;width:30%;height: 50%;">
-    <p>sys选址系统首页</p>
-    <a href="javascript:loadAirportData()" class="easyui-linkbutton" iconCls="icon-add">加载机场数据</a>
-    <a href="javascript:removeAirportData()" class="easyui-linkbutton" iconCls="icon-undo">移除机场数据</a>
-    <!-- class="easyui-datagrid"-->
-    <table id="airportsdg" title="机场数据信息" style="width:100%;height:100%" data-options="
-				rownumbers:true,
-				singleSelect:true,
-				autoRowHeight:false,
-				pagination:true,
-				pageSize:10">
-        <thead>
-        <tr>
-            <th field="name" width="150" align="center">机场名称</th>
-            <th field="code" width="80" align="center">机场代码</th>
-            <th field="lon" width="80" align="center">经度</th>
-            <th field="lat" width="80" align="center">纬度</th>
-            <th field="msl" width="80" align="center">标高</th>
-            <th field="type" width="80" align="center">类型</th>
-        </tr>
-        </thead>
-        <tbody id="airportsbody"></tbody>
-    </table>
+
+<div class="easyui-layout" style="width:40%;height:100%;float: left;">
+    <div data-options="region:'west',split:true" title="导航页" style="width:15%;">
+        <a href="javascript:openTab('机场数据','airportManage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">机场数据</a>
+        <a href="javascript:openTab('导航台数据','navigationStation','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">导航台数据</a>
+        <a href="javascript:openTab('限制区数据','restrictedArea','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">限制区数据</a>
+        <a href="javascript:openTab('fss选址','restrictedArea','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">fss选址</a>
+        <a href="javascript:openTab('fss服务覆盖','serviceCoverage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">fss服务覆盖</a>
+        <a href="javascript:openTab('选址成本','siteCost','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">选址成本</a>
+
+
+    </div>
+    <div  data-options="region:'center',title:'主页',iconCls:'icon-ok'">
+        <div class="easyui-tabs" fit="true" border="false" id="tabs">
+            <div title="首页" data-options="iconCls:'icon-home'">
+                <div align="center" style="padding-top: 150px">
+                    <font size="10" color="red">欢迎使用</font>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div id="cesiumContainer" style="float: right;width:60%;height: 100%;"></div>
+
+
+
 <script>
     var token = '43f240f0c7548fa36e55fb6b2354b695';
     // 服务域名
@@ -248,7 +249,8 @@ function loadAirportDataInhtml() {
             async:"false",
             success:function(result){
                 var str = "";
-                var tbody = window.document.getElementById("airportsbody");
+                var tbody = document.getElementById("airportManage").contentWindow.document.getElementById('airportsbody');
+                //var tbody = document.getElementById("airportManage").document.getElementById('airportsbody');
                 for (var item in result){
                     str += "<tr>" +
                         "<td>" + result[item].name + "</td>" +
@@ -299,6 +301,66 @@ function loadAirportDataInhtml() {
         viewer.entities.removeAll();
     }
 
+
+    //加载已有的导航台数据
+    function loadnavStationData() {
+        $.ajax({
+            url:'/navStation/all',
+            type:'get',
+            datatype:"json",
+            async:"false",
+            success:function(result){
+                var str = "";
+                var tbody = document.getElementById("navigationStation").contentWindow.document.getElementById('navStationbody');
+                //var tbody = document.getElementById("airportManage").document.getElementById('airportsbody');
+                for (var item in result){
+                    str += "<tr>" +
+                        "<td>" + result[item].stationName+ "</td>" +
+                        "<td>" + result[item].navlon + "</td>" +
+                        "<td>" + result[item].navlat + "</td>" +
+                        "<td>" + result[item].navtype + "</td>" +
+                        "</tr>";
+                    var entity = new Cesium.Entity({
+                        id:result[item].airportsId,
+                        name:result[item].name,
+                        show:true,
+                        position:Cesium.Cartesian3.fromDegrees(result[item].navlat,result[item].navlon),
+                        point:new Cesium.PointGraphics({
+                            show:false,
+                            pixelSize :  5,
+                            heightReference :  Cesium.HeightReference.NONE,
+                            color : new Cesium.Color ( 255 , 255 , 0 , 1 ),
+                            outlineColor : new Cesium.Color ( 0 , 0 , 0 , 0 ),
+                            outlineWidth : 1,
+                            scaleByDistance : new Cesium.NearFarScalar ( 0 , 1 , 5e10 , 1 ),
+                            translucencyByDistance : new Cesium.NearFarScalar ( 0 , 1 , 5e10 , 1 ),
+                            distanceDisplayCondition :  new Cesium.DistanceDisplayCondition(0, 4.8e10),
+
+                        }),
+                        label:{
+                            text:result[item].stationName,
+                            font: '10pt monospace',
+                            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                            outlineWidth : 1,
+                            verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
+                            pixelOffset : new Cesium.Cartesian2(0, -9),
+                        },
+                        billboard:{
+                            image:"../static/image/small_airport.png",
+                            width:16,
+                            height:16,
+                        },
+                    });
+                    viewer.entities.add(entity);
+                }
+                tbody.innerHTML = str;
+            }});
+    }
+
+
+    function removenavStationData(){
+        viewer.entities.removeAll();
+    }
     function pagerFilter(data){
         if (typeof data.length == 'number' && typeof data.splice == 'function'){	// is array
             data = {
@@ -327,6 +389,34 @@ function loadAirportDataInhtml() {
         var end = start + parseInt(opts.pageSize);
         data.rows = (data.originalRows.slice(start, end));
         return data;
+    }
+
+    function openTab(text,url,icon){
+
+        if($("#tabs").tabs("exists",text)){
+            $("#tabs").tabs("select",text);
+            var selTab = $('#tabs').tabs('getSelected');
+            var url = $(selTab.panel('options').content).attr('src');
+            $('#tabs').tabs('update', {
+                tab: selTab,
+                options: {
+                    content:createFrame(url)
+                }
+            })
+        }else{
+
+            var content="<iframe frameborder=0 scrolling='auto' id='"+url+"' name='"+url+"' style='width:100%;height:100%' src='"+url+"'></iframe>";
+            $("#tabs").tabs("add",{
+                title:text,
+                iconCls:icon,
+                content:content,
+                closable:true,
+            });
+        }
+    }
+
+    function createFrame(url){
+        return '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
     }
 
 </script>

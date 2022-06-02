@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kg.fss.dao.NavStationMapper">
+  <resultMap id="BaseResultMap" type="com.kg.fss.entity.NavStation">
+    <id column="stationId" jdbcType="INTEGER" property="stationId" />
+    <result column="stationName" jdbcType="VARCHAR" property="stationName" />
+    <result column="navlon" jdbcType="DOUBLE" property="navlon" />
+    <result column="navlat" jdbcType="DOUBLE" property="navlat" />
+    <result column="navtype" jdbcType="VARCHAR" property="navtype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    stationId, stationName, navlon, navlat, navtype
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from navStation
+    where stationId = #{stationId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllNavStation" resultType="com.kg.fss.entity.NavStation">
+    select * from navStation
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from navStation
+    where stationId = #{stationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kg.fss.entity.NavStation">
+    insert into navStation (stationId, stationName, navlon, 
+      navlat, navtype)
+    values (#{stationId,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, #{navlon,jdbcType=DOUBLE}, 
+      #{navlat,jdbcType=DOUBLE}, #{navtype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kg.fss.entity.NavStation">
+    insert into navStation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stationId != null">
+        stationId,
+      </if>
+      <if test="stationName != null">
+        stationName,
+      </if>
+      <if test="navlon != null">
+        navlon,
+      </if>
+      <if test="navlat != null">
+        navlat,
+      </if>
+      <if test="navtype != null">
+        navtype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stationId != null">
+        #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null">
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="navlon != null">
+        #{navlon,jdbcType=DOUBLE},
+      </if>
+      <if test="navlat != null">
+        #{navlat,jdbcType=DOUBLE},
+      </if>
+      <if test="navtype != null">
+        #{navtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kg.fss.entity.NavStation">
+    update navStation
+    <set>
+      <if test="stationName != null">
+        stationName = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="navlon != null">
+        navlon = #{navlon,jdbcType=DOUBLE},
+      </if>
+      <if test="navlat != null">
+        navlat = #{navlat,jdbcType=DOUBLE},
+      </if>
+      <if test="navtype != null">
+        navtype = #{navtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stationId = #{stationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kg.fss.entity.NavStation">
+    update navStation
+    set stationName = #{stationName,jdbcType=VARCHAR},
+      navlon = #{navlon,jdbcType=DOUBLE},
+      navlat = #{navlat,jdbcType=DOUBLE},
+      navtype = #{navtype,jdbcType=VARCHAR}
+    where stationId = #{stationId,jdbcType=INTEGER}
+  </update>
+</mapper>
