@@ -7,9 +7,12 @@
     <result column="navlon" jdbcType="DOUBLE" property="navlon" />
     <result column="navlat" jdbcType="DOUBLE" property="navlat" />
     <result column="navtype" jdbcType="VARCHAR" property="navtype" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="ch" jdbcType="VARCHAR" property="ch" />
+    <result column="freq" jdbcType="VARCHAR" property="freq" />
   </resultMap>
   <sql id="Base_Column_List">
-    stationId, stationName, navlon, navlat, navtype
+    stationId, stationName, navlon, navlat, navtype, code, ch, freq
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -17,9 +20,8 @@
     from navStation
     where stationId = #{stationId,jdbcType=INTEGER}
   </select>
-
   <select id="selectAllNavStation" resultType="com.kg.fss.entity.NavStation">
-    select * from navStation
+     select * from navStation
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from navStation
@@ -27,9 +29,11 @@
   </delete>
   <insert id="insert" parameterType="com.kg.fss.entity.NavStation">
     insert into navStation (stationId, stationName, navlon, 
-      navlat, navtype)
+      navlat, navtype, code, 
+      ch, freq)
     values (#{stationId,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, #{navlon,jdbcType=DOUBLE}, 
-      #{navlat,jdbcType=DOUBLE}, #{navtype,jdbcType=VARCHAR})
+      #{navlat,jdbcType=DOUBLE}, #{navtype,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{ch,jdbcType=VARCHAR}, #{freq,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.kg.fss.entity.NavStation">
     insert into navStation
@@ -49,6 +53,15 @@
       <if test="navtype != null">
         navtype,
       </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="ch != null">
+        ch,
+      </if>
+      <if test="freq != null">
+        freq,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="stationId != null">
@@ -65,6 +78,15 @@
       </if>
       <if test="navtype != null">
         #{navtype,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ch != null">
+        #{ch,jdbcType=VARCHAR},
+      </if>
+      <if test="freq != null">
+        #{freq,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -83,6 +105,15 @@
       <if test="navtype != null">
         navtype = #{navtype,jdbcType=VARCHAR},
       </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ch != null">
+        ch = #{ch,jdbcType=VARCHAR},
+      </if>
+      <if test="freq != null">
+        freq = #{freq,jdbcType=VARCHAR},
+      </if>
     </set>
     where stationId = #{stationId,jdbcType=INTEGER}
   </update>
@@ -91,7 +122,11 @@
     set stationName = #{stationName,jdbcType=VARCHAR},
       navlon = #{navlon,jdbcType=DOUBLE},
       navlat = #{navlat,jdbcType=DOUBLE},
-      navtype = #{navtype,jdbcType=VARCHAR}
+      navtype = #{navtype,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      ch = #{ch,jdbcType=VARCHAR},
+      freq = #{freq,jdbcType=VARCHAR}
     where stationId = #{stationId,jdbcType=INTEGER}
   </update>
+
 </mapper>

@@ -15,6 +15,12 @@ public class NavStation implements Serializable {
 
     private String navtype;
 
+    private String code;
+
+    private String ch;
+
+    private String freq;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getStationId() {
@@ -57,12 +63,39 @@ public class NavStation implements Serializable {
         this.navtype = navtype == null ? null : navtype.trim();
     }
 
-    public NavStation(Integer stationId, String stationName, Double navlon, Double navlat, String navtype) {
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code == null ? null : code.trim();
+    }
+
+    public String getCh() {
+        return ch;
+    }
+
+    public void setCh(String ch) {
+        this.ch = ch == null ? null : ch.trim();
+    }
+
+    public String getFreq() {
+        return freq;
+    }
+
+    public void setFreq(String freq) {
+        this.freq = freq == null ? null : freq.trim();
+    }
+
+    public NavStation(Integer stationId, String stationName, Double navlon, Double navlat, String navtype, String code, String ch, String freq) {
         this.stationId = stationId;
         this.stationName = stationName;
         this.navlon = navlon;
         this.navlat = navlat;
         this.navtype = navtype;
+        this.code = code;
+        this.ch = ch;
+        this.freq = freq;
     }
 
     public NavStation() {

@@ -15,4 +15,10 @@ public class NavStationService {
     public List<NavStation> getAllNavStation(){
         return navStationMapper.selectAllNavStation();
     }
+    public int insert(NavStation navStation){
+        return navStationMapper.insert(navStation);
+    }
+    public int update(NavStation navStation){
+        return navStationMapper.updateByPrimaryKey(navStation);
+    }
 }

@@ -318,6 +318,9 @@ function loadAirportDataInhtml() {
                         "<td>" + result[item].stationName+ "</td>" +
                         "<td>" + result[item].navlon + "</td>" +
                         "<td>" + result[item].navlat + "</td>" +
+                        "<td>" + result[item].code + "</td>" +
+                        "<td>" + result[item].ch + "</td>" +
+                        "<td>" + result[item].freq + "</td>" +
                         "<td>" + result[item].navtype + "</td>" +
                         "</tr>";
                     var entity = new Cesium.Entity({
@@ -338,7 +341,7 @@ function loadAirportDataInhtml() {
 
                         }),
                         label:{
-                            text:result[item].stationName,
+                            text:result[item].stationName+"\n"+result[item].freq+" "+result[item].code+"\n"+result[item].ch,
                             font: '10pt monospace',
                             style: Cesium.LabelStyle.FILL_AND_OUTLINE,
                             outlineWidth : 1,
