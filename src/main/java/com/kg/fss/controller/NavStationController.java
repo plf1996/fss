@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Controller()
+@Controller
 @RequestMapping("/navStation")
 public class NavStationController {
     @Autowired

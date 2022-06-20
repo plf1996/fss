@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kg.fss.dao.RecRestrictAreaMapper">
+  <resultMap id="BaseResultMap" type="com.kg.fss.entity.RecRestrictArea">
+    <id column="idrestrictArea" jdbcType="INTEGER" property="idrestrictArea" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="lat1" jdbcType="DOUBLE" property="lat1" />
+    <result column="long1" jdbcType="DOUBLE" property="long1" />
+    <result column="lat2" jdbcType="DOUBLE" property="lat2" />
+    <result column="long2" jdbcType="DOUBLE" property="long2" />
+    <result column="lat3" jdbcType="DOUBLE" property="lat3" />
+    <result column="long3" jdbcType="DOUBLE" property="long3" />
+    <result column="lat4" jdbcType="DOUBLE" property="lat4" />
+    <result column="long4" jdbcType="DOUBLE" property="long4" />
+    <result column="lat5" jdbcType="DOUBLE" property="lat5" />
+    <result column="long5" jdbcType="DOUBLE" property="long5" />
+    <result column="sh" jdbcType="VARCHAR" property="sh" />
+    <result column="eh" jdbcType="VARCHAR" property="eh" />
+    <result column="st" jdbcType="VARCHAR" property="st" />
+    <result column="et" jdbcType="VARCHAR" property="et" />
+    <result column="points" jdbcType="INTEGER" property="points" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    idrestrictArea, name, lat1, long1, lat2, long2, lat3, long3, lat4, long4, lat5, long5, 
+    sh, eh, st, et, points
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recRestrictArea
+    where idrestrictArea = #{idrestrictArea,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllRecRestrictArea" resultType="com.kg.fss.entity.RecRestrictArea">
+     select * from recRestrictArea
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recRestrictArea
+    where idrestrictArea = #{idrestrictArea,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kg.fss.entity.RecRestrictArea">
+    insert into recRestrictArea (idrestrictArea, name, lat1, 
+      long1, lat2, long2, lat3, 
+      long3, lat4, long4, lat5, 
+      long5, sh, eh, st, 
+      et, points)
+    values (#{idrestrictArea,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{lat1,jdbcType=DOUBLE}, 
+      #{long1,jdbcType=DOUBLE}, #{lat2,jdbcType=DOUBLE}, #{long2,jdbcType=DOUBLE}, #{lat3,jdbcType=DOUBLE}, 
+      #{long3,jdbcType=DOUBLE}, #{lat4,jdbcType=DOUBLE}, #{long4,jdbcType=DOUBLE}, #{lat5,jdbcType=DOUBLE}, 
+      #{long5,jdbcType=DOUBLE}, #{sh,jdbcType=VARCHAR}, #{eh,jdbcType=VARCHAR}, #{st,jdbcType=VARCHAR}, 
+      #{et,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kg.fss.entity.RecRestrictArea">
+    insert into recRestrictArea
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idrestrictArea != null">
+        idrestrictArea,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="lat1 != null">
+        lat1,
+      </if>
+      <if test="long1 != null">
+        long1,
+      </if>
+      <if test="lat2 != null">
+        lat2,
+      </if>
+      <if test="long2 != null">
+        long2,
+      </if>
+      <if test="lat3 != null">
+        lat3,
+      </if>
+      <if test="long3 != null">
+        long3,
+      </if>
+      <if test="lat4 != null">
+        lat4,
+      </if>
+      <if test="long4 != null">
+        long4,
+      </if>
+      <if test="lat5 != null">
+        lat5,
+      </if>
+      <if test="long5 != null">
+        long5,
+      </if>
+      <if test="sh != null">
+        sh,
+      </if>
+      <if test="eh != null">
+        eh,
+      </if>
+      <if test="st != null">
+        st,
+      </if>
+      <if test="et != null">
+        et,
+      </if>
+      <if test="points != null">
+        points,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idrestrictArea != null">
+        #{idrestrictArea,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lat1 != null">
+        #{lat1,jdbcType=DOUBLE},
+      </if>
+      <if test="long1 != null">
+        #{long1,jdbcType=DOUBLE},
+      </if>
+      <if test="lat2 != null">
+        #{lat2,jdbcType=DOUBLE},
+      </if>
+      <if test="long2 != null">
+        #{long2,jdbcType=DOUBLE},
+      </if>
+      <if test="lat3 != null">
+        #{lat3,jdbcType=DOUBLE},
+      </if>
+      <if test="long3 != null">
+        #{long3,jdbcType=DOUBLE},
+      </if>
+      <if test="lat4 != null">
+        #{lat4,jdbcType=DOUBLE},
+      </if>
+      <if test="long4 != null">
+        #{long4,jdbcType=DOUBLE},
+      </if>
+      <if test="lat5 != null">
+        #{lat5,jdbcType=DOUBLE},
+      </if>
+      <if test="long5 != null">
+        #{long5,jdbcType=DOUBLE},
+      </if>
+      <if test="sh != null">
+        #{sh,jdbcType=VARCHAR},
+      </if>
+      <if test="eh != null">
+        #{eh,jdbcType=VARCHAR},
+      </if>
+      <if test="st != null">
+        #{st,jdbcType=VARCHAR},
+      </if>
+      <if test="et != null">
+        #{et,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null">
+        #{points,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kg.fss.entity.RecRestrictArea">
+    update recRestrictArea
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lat1 != null">
+        lat1 = #{lat1,jdbcType=DOUBLE},
+      </if>
+      <if test="long1 != null">
+        long1 = #{long1,jdbcType=DOUBLE},
+      </if>
+      <if test="lat2 != null">
+        lat2 = #{lat2,jdbcType=DOUBLE},
+      </if>
+      <if test="long2 != null">
+        long2 = #{long2,jdbcType=DOUBLE},
+      </if>
+      <if test="lat3 != null">
+        lat3 = #{lat3,jdbcType=DOUBLE},
+      </if>
+      <if test="long3 != null">
+        long3 = #{long3,jdbcType=DOUBLE},
+      </if>
+      <if test="lat4 != null">
+        lat4 = #{lat4,jdbcType=DOUBLE},
+      </if>
+      <if test="long4 != null">
+        long4 = #{long4,jdbcType=DOUBLE},
+      </if>
+      <if test="lat5 != null">
+        lat5 = #{lat5,jdbcType=DOUBLE},
+      </if>
+      <if test="long5 != null">
+        long5 = #{long5,jdbcType=DOUBLE},
+      </if>
+      <if test="sh != null">
+        sh = #{sh,jdbcType=VARCHAR},
+      </if>
+      <if test="eh != null">
+        eh = #{eh,jdbcType=VARCHAR},
+      </if>
+      <if test="st != null">
+        st = #{st,jdbcType=VARCHAR},
+      </if>
+      <if test="et != null">
+        et = #{et,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null">
+        points = #{points,jdbcType=INTEGER},
+      </if>
+    </set>
+    where idrestrictArea = #{idrestrictArea,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kg.fss.entity.RecRestrictArea">
+    update recRestrictArea
+    set name = #{name,jdbcType=VARCHAR},
+      lat1 = #{lat1,jdbcType=DOUBLE},
+      long1 = #{long1,jdbcType=DOUBLE},
+      lat2 = #{lat2,jdbcType=DOUBLE},
+      long2 = #{long2,jdbcType=DOUBLE},
+      lat3 = #{lat3,jdbcType=DOUBLE},
+      long3 = #{long3,jdbcType=DOUBLE},
+      lat4 = #{lat4,jdbcType=DOUBLE},
+      long4 = #{long4,jdbcType=DOUBLE},
+      lat5 = #{lat5,jdbcType=DOUBLE},
+      long5 = #{long5,jdbcType=DOUBLE},
+      sh = #{sh,jdbcType=VARCHAR},
+      eh = #{eh,jdbcType=VARCHAR},
+      st = #{st,jdbcType=VARCHAR},
+      et = #{et,jdbcType=VARCHAR},
+      points = #{points,jdbcType=INTEGER}
+    where idrestrictArea = #{idrestrictArea,jdbcType=INTEGER}
+  </update>
+</mapper>

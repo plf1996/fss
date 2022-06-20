@@ -78,7 +78,7 @@
             <!--&lt;!&ndash;区分大小写，与数据库保持一致&ndash;&gt;-->
             <!--<property name= "useActualColumnNames" value= "true"/>-->
         <!--</table>-->
-        <table tableName="navStation" domainObjectName="NavStation"
+        <table tableName="circularRestrictArea" domainObjectName="CircularRestrictArea"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

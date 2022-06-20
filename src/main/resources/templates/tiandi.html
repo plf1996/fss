@@ -15,6 +15,7 @@
     <script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/easyui/jquery.easyui.min.js}"></script>
     <script type="text/javascript" cesium="true" th:src="@{/static/cesium1.58/Cesium.js}"></script>
+   <!-- <script type="text/javascript" cesium="true" th:src="@{/static/cesium1.94.3/Cesium.js}"></script>-->
     <script type="text/javascript" cesium="true" src="http://api.tianditu.gov.cn/cdn/plugins/cesium/cesiumTdt.js" ></script>
     <script type="text/javascript" cesium="true" src="https://api.tianditu.gov.cn/cdn/plugins/cesium/Cesium_ext_min.js"></script>
     <script type="text/javascript" cesium="true" src="https://api.tianditu.gov.cn/cdn/plugins/cesium/long.min.js"></script>
@@ -236,9 +237,90 @@
     wtfs.initTDT([{"x":6,"y":1,"level":2,"boundBox":{"minX":90,"minY":0,"maxX":135,"maxY":45}},{"x":7,"y":1,"level":2,"boundBox":{"minX":135,"minY":0,"maxX":180,"maxY":45}},{"x":6,"y":0,"level":2,"boundBox":{"minX":90,"minY":45,"maxX":135,"maxY":90}},{"x":7,"y":0,"level":2,"boundBox":{"minX":135,"minY":45,"maxX":180,"maxY":90}},{"x":5,"y":1,"level":2,"boundBox":{"minX":45,"minY":0,"maxX":90,"maxY":45}},{"x":4,"y":1,"level":2,"boundBox":{"minX":0,"minY":0,"maxX":45,"maxY":45}},{"x":5,"y":0,"level":2,"boundBox":{"minX":45,"minY":45,"maxX":90,"maxY":90}},{"x":4,"y":0,"level":2,"boundBox":{"minX":0,"minY":45,"maxX":45,"maxY":90}},{"x":6,"y":2,"level":2,"boundBox":{"minX":90,"minY":-45,"maxX":135,"maxY":0}},{"x":6,"y":3,"level":2,"boundBox":{"minX":90,"minY":-90,"maxX":135,"maxY":-45}},{"x":7,"y":2,"level":2,"boundBox":{"minX":135,"minY":-45,"maxX":180,"maxY":0}},{"x":5,"y":2,"level":2,"boundBox":{"minX":45,"minY":-45,"maxX":90,"maxY":0}},{"x":4,"y":2,"level":2,"boundBox":{"minX":0,"minY":-45,"maxX":45,"maxY":0}},{"x":3,"y":1,"level":2,"boundBox":{"minX":-45,"minY":0,"maxX":0,"maxY":45}},{"x":3,"y":0,"level":2,"boundBox":{"minX":-45,"minY":45,"maxX":0,"maxY":90}},{"x":2,"y":0,"level":2,"boundBox":{"minX":-90,"minY":45,"maxX":-45,"maxY":90}},{"x":0,"y":1,"level":2,"boundBox":{"minX":-180,"minY":0,"maxX":-135,"maxY":45}},{"x":1,"y":0,"level":2,"boundBox":{"minX":-135,"minY":45,"maxX":-90,"maxY":90}},{"x":0,"y":0,"level":2,"boundBox":{"minX":-180,"minY":45,"maxX":-135,"maxY":90}}]);
 
 
+    var redPolygon = viewer.entities.add({
+        name: "Red polygon on surface",
+        polygon: {
+            hierarchy: Cesium.Cartesian3.fromDegreesArray([-115.0,37.0,-115.0,32.0,-107.0,33.0,-102.0,31.0,-102.0,35.0, ]),
+            material: Cesium.Color.RED.withAlpha(0.5),
+        },
+    });
+    var polyPositions = redPolygon.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions;
+    var polyCenter = Cesium.BoundingSphere.fromPoints(polyPositions).center;//中心点
+    polyCenter = Cesium.Ellipsoid.WGS84.scaleToGeodeticSurface(polyCenter);
+    redPolygon.position = polyCenter;
+
+    redPolygon.label={
+        // position:
+        text:'Red polygon on surface',
+        color : Cesium.Color.fromCssColorString('#fff'),
+        font:'normal 32px MicroSoft YaHei',
+        showBackground : true,
+        scale : 0.5,
+        horizontalOrigin : Cesium.HorizontalOrigin.LEFT_CLICK,
+        verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
+        disableDepthTestDistance : 10000.0
+    };
+
 function loadAirportDataInhtml() {
 
 }
+
+function loadRecRestrictAreaData() {
+
+    $.ajax({
+        url:'/recRestrictArea/all',
+        type:'get',
+        datatype:"json",
+        async:"false",
+        success:function(result){
+            for (var item in result){
+                var pointsarray = [   result[item].long1,result[item].lat1,
+                    result[item].long2,result[item].lat2,
+                    result[item].long3,result[item].lat3,
+                    result[item].long4,result[item].lat4,
+                    result[item].long5,result[item].lat5,
+                ]
+                var filtered = pointsarray.filter(function (el) {
+                    return el != null;
+                });
+                var poly = viewer.entities.add({
+                    name :result[item].name,
+                    polygon : {
+                        hierarchy : Cesium.Cartesian3.fromDegreesArray(filtered),
+                        height : 0,
+                        material : Cesium.Color.RED.withAlpha(0.5),
+                        outline : true,
+                        outlineColor : Cesium.Color.BLACK
+
+                    },
+                    // label:{
+                    //     text:"testmsg",
+                    //     color:Cesium.Color.WHITE,
+                    //     font: '10pt monospace',
+                    //     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                    //     outlineWidth : 2,
+                    //     verticalOrigin : Cesium.VerticalOrigin.TOP,
+                    //     pixelOffset : new Cesium.Cartesian2(0, -9),
+                    // },
+                });
+                poly.label={
+                    text:"testmsg",
+                    color : Cesium.Color.fromCssColorString('#fff'),
+                    font:'normal 32px MicroSoft YaHei',
+                    showBackground : false,
+                    scale : 0.5,
+                   horizontalOrigin : Cesium.HorizontalOrigin.LEFT_CLICK,
+                    verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
+                    disableDepthTestDistance : 10000.0
+                };
+
+            }
+        }});
+
+
+}
+
+
 
 
     function loadAirportData() {
