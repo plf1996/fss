@@ -78,18 +78,18 @@
     // cesium 初始化
     var viewer = new Cesium.Map('cesiumContainer', {
         shouldAnimate: true, //是否允许动画
-        selectionIndicator: false,
-        baseLayerPicker: false,
-        fullscreenButton: false,
-        geocoder: false,
-        homeButton: false,
-        infoBox: false,
-        sceneModePicker: false,
-        timeline: false,
-        navigationHelpButton: false,
-        navigationInstructionsInitiallyVisible: false,
-        showRenderLoopErrors: false,
-        shadows: false,
+        selectionIndicator: true,//创建SelectionIndicator小部件。
+        baseLayerPicker: false,//不会创建BaseLayerPicker小部件
+        fullscreenButton: true,//不会创建FullscreenButton小部件
+        geocoder: true,//创建Geocoder小部件
+        homeButton: false,//不会创建HomeButton小部件。
+        infoBox: true,//不会创建InfoBox小部件
+        sceneModePicker: false,//不会创建SceneModePicker小部件
+        timeline: false,//不会创建时间轴窗口小部件。
+        navigationHelpButton: false,//不会创建导航帮助按钮
+        navigationInstructionsInitiallyVisible: false,//如果导航说明最初应该是可见的，则为true；如果直到用户明确单击该按钮，则不显示该说明，否则为false
+        showRenderLoopErrors: false,//
+        shadows: false,//确定阴影是否由太阳投射。
     });
 
     // 抗锯齿
@@ -438,7 +438,7 @@ function removeRecRestrictAreaData() {
                         "</tr>";
                     var entity = new Cesium.Entity({
                         id:result[item].airportsId,
-                        name:result[item].name,
+                        name:result[item].stationName,
                         show:true,
                         position:Cesium.Cartesian3.fromDegrees(result[item].navlat,result[item].navlon),
                         point:new Cesium.PointGraphics({
