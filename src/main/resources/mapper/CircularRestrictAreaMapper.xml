@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kg.fss.dao.CircularRestrictAreaMapper">
+  <resultMap id="BaseResultMap" type="com.kg.fss.entity.CircularRestrictArea">
+    <id column="idcircularRestrictArea" jdbcType="INTEGER" property="idcircularRestrictArea" />
+    <result column="centerLat" jdbcType="DOUBLE" property="centerLat" />
+    <result column="centerLong" jdbcType="DOUBLE" property="centerLong" />
+    <result column="radius" jdbcType="INTEGER" property="radius" />
+    <result column="sh" jdbcType="VARCHAR" property="sh" />
+    <result column="eh" jdbcType="VARCHAR" property="eh" />
+    <result column="st" jdbcType="VARCHAR" property="st" />
+    <result column="et" jdbcType="VARCHAR" property="et" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    idcircularRestrictArea, centerLat, centerLong, radius, sh, eh, st, et, name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from circularRestrictArea
+    where idcircularRestrictArea = #{idcircularRestrictArea,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllCircularRestrictArea" resultType="com.kg.fss.entity.CircularRestrictArea">
+    select * from circularRestrictArea
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from circularRestrictArea
+    where idcircularRestrictArea = #{idcircularRestrictArea,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.kg.fss.entity.CircularRestrictArea">
+    insert into circularRestrictArea (idcircularRestrictArea, centerLat, 
+      centerLong, radius, sh, 
+      eh, st, et,name)
+    values (#{idcircularRestrictArea,jdbcType=INTEGER}, #{centerLat,jdbcType=DOUBLE}, 
+      #{centerLong,jdbcType=DOUBLE}, #{radius,jdbcType=INTEGER}, #{sh,jdbcType=VARCHAR}, 
+      #{eh,jdbcType=VARCHAR}, #{st,jdbcType=VARCHAR}, #{et,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kg.fss.entity.CircularRestrictArea">
+    insert into circularRestrictArea
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idcircularRestrictArea != null">
+        idcircularRestrictArea,
+      </if>
+      <if test="centerLat != null">
+        centerLat,
+      </if>
+      <if test="centerLong != null">
+        centerLong,
+      </if>
+      <if test="radius != null">
+        radius,
+      </if>
+      <if test="sh != null">
+        sh,
+      </if>
+      <if test="eh != null">
+        eh,
+      </if>
+      <if test="st != null">
+        st,
+      </if>
+      <if test="et != null">
+        et,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idcircularRestrictArea != null">
+        #{idcircularRestrictArea,jdbcType=INTEGER},
+      </if>
+      <if test="centerLat != null">
+        #{centerLat,jdbcType=DOUBLE},
+      </if>
+      <if test="centerLong != null">
+        #{centerLong,jdbcType=DOUBLE},
+      </if>
+      <if test="radius != null">
+        #{radius,jdbcType=INTEGER},
+      </if>
+      <if test="sh != null">
+        #{sh,jdbcType=VARCHAR},
+      </if>
+      <if test="eh != null">
+        #{eh,jdbcType=VARCHAR},
+      </if>
+      <if test="st != null">
+        #{st,jdbcType=VARCHAR},
+      </if>
+      <if test="et != null">
+        #{et,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kg.fss.entity.CircularRestrictArea">
+    update circularRestrictArea
+    <set>
+      <if test="centerLat != null">
+        centerLat = #{centerLat,jdbcType=DOUBLE},
+      </if>
+      <if test="centerLong != null">
+        centerLong = #{centerLong,jdbcType=DOUBLE},
+      </if>
+      <if test="radius != null">
+        radius = #{radius,jdbcType=INTEGER},
+      </if>
+      <if test="sh != null">
+        sh = #{sh,jdbcType=VARCHAR},
+      </if>
+      <if test="eh != null">
+        eh = #{eh,jdbcType=VARCHAR},
+      </if>
+      <if test="st != null">
+        st = #{st,jdbcType=VARCHAR},
+      </if>
+      <if test="et != null">
+        et = #{et,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        et = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where idcircularRestrictArea = #{idcircularRestrictArea,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kg.fss.entity.CircularRestrictArea">
+    update circularRestrictArea
+    set centerLat = #{centerLat,jdbcType=DOUBLE},
+      centerLong = #{centerLong,jdbcType=DOUBLE},
+      radius = #{radius,jdbcType=INTEGER},
+      sh = #{sh,jdbcType=VARCHAR},
+      eh = #{eh,jdbcType=VARCHAR},
+      st = #{st,jdbcType=VARCHAR},
+      et = #{et,jdbcType=VARCHAR},
+       name = #{name,jdbcType=VARCHAR}
+    where idcircularRestrictArea = #{idcircularRestrictArea,jdbcType=INTEGER}
+  </update>
+</mapper>

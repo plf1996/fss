@@ -48,7 +48,7 @@
         <a href="javascript:openTab('机场数据','airportManage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">机场数据</a>
         <a href="javascript:openTab('导航台数据','navigationStation','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">导航台数据</a>
         <a href="javascript:openTab('限制区数据','restrictedArea','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">限制区数据</a>
-        <a href="javascript:openTab('fss选址','restrictedArea','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">fss选址</a>
+        <a href="javascript:openTab('fss选址','siteSelection','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">fss选址</a>
         <a href="javascript:openTab('fss服务覆盖','serviceCoverage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">fss服务覆盖</a>
         <a href="javascript:openTab('选址成本','siteCost','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">选址成本</a>
 
@@ -268,6 +268,33 @@ function loadAirportDataInhtml() {
 function loadRecRestrictAreaData() {
 
     $.ajax({
+        url:'/circularRestrictArea/all',
+        type:'get',
+        datatype:"json",
+        async:"false",
+        success:function(result){
+            for (var item in result){
+                var polycircular = viewer.entities.add({
+                    position: Cesium.Cartesian3.fromDegrees(result[item].centerLong, result[item].centerLat),
+                    name :result[item].name,
+                    ellipse: {
+                        semiMinorAxis: result[item].radius,
+                        semiMajorAxis: result[item].radius,
+                        height: 200,
+                        material : Cesium.Color.RED.withAlpha(0.5),
+                        outline: true, // height must be set for outline to display
+                        heightReference:Cesium.HeightReference.CLAMP_TO_GROUND,
+                    },
+
+
+
+                });
+
+
+            }
+        }});
+
+    $.ajax({
         url:'/recRestrictArea/all',
         type:'get',
         datatype:"json",
@@ -285,13 +312,15 @@ function loadRecRestrictAreaData() {
                 });
                 var poly = viewer.entities.add({
                     name :result[item].name,
+
                     polygon : {
                         hierarchy : Cesium.Cartesian3.fromDegreesArray(filtered),
-                        height : 0,
+                        height : 300,
                         material : Cesium.Color.RED.withAlpha(0.5),
                         outline : true,
-                        outlineColor : Cesium.Color.BLACK
-
+                        outlineColor : Cesium.Color.BLACK,
+                        //heightReference:Cesium.HeightReference.CLAMP_TO_GROUND,
+                        heightReference:Cesium.HeightReference.RELATIVE_TO_GROUND,
                     },
                     // label:{
                     //     text:"testmsg",
@@ -383,7 +412,9 @@ function loadRecRestrictAreaData() {
         viewer.entities.removeAll();
     }
 
-
+function removeRecRestrictAreaData() {
+    viewer.entities.removeAll();
+}
     //加载已有的导航台数据
     function loadnavStationData() {
         $.ajax({

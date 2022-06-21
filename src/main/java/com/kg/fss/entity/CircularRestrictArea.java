@@ -3,7 +3,6 @@ package com.kg.fss.entity;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 @Data
 public class CircularRestrictArea implements Serializable {
     private Integer idcircularRestrictArea;
@@ -18,9 +17,10 @@ public class CircularRestrictArea implements Serializable {
 
     private String eh;
 
-    private Date st;
+    private String st;
 
-    private Date et;
+    private String et;
+    private String name;
 
     private static final long serialVersionUID = 1L;
 
@@ -72,23 +72,29 @@ public class CircularRestrictArea implements Serializable {
         this.eh = eh == null ? null : eh.trim();
     }
 
-    public Date getSt() {
+    public String getSt() {
         return st;
     }
 
-    public void setSt(Date st) {
-        this.st = st;
+    public void setSt(String st) {
+        this.st = st == null ? null : st.trim();
     }
 
-    public Date getEt() {
+    public String getEt() {
         return et;
     }
 
-    public void setEt(Date et) {
-        this.et = et;
+    public void setEt(String et) {
+        this.et = et == null ? null : et.trim();
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public CircularRestrictArea(Integer idcircularRestrictArea, Double centerLat, Double centerLong, Integer radius, String sh, String eh, Date st, Date et) {
+    public CircularRestrictArea(Integer idcircularRestrictArea, Double centerLat, Double centerLong, Integer radius, String sh, String eh, String st, String et, String name) {
         this.idcircularRestrictArea = idcircularRestrictArea;
         this.centerLat = centerLat;
         this.centerLong = centerLong;
@@ -97,6 +103,7 @@ public class CircularRestrictArea implements Serializable {
         this.eh = eh;
         this.st = st;
         this.et = et;
+        this.name = name;
     }
 
     public CircularRestrictArea() {
