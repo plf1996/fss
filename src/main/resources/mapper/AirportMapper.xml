@@ -9,9 +9,10 @@
     <result column="lat" jdbcType="DOUBLE" property="lat" />
     <result column="msl" jdbcType="DOUBLE" property="msl" />
     <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
   </resultMap>
   <sql id="Base_Column_List">
-    airportsId, name, code, lon, lat, msl, type
+    airportsId, name, code, lon, lat, msl, type,amount
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +29,10 @@
   </delete>
   <insert id="insert" parameterType="com.kg.fss.entity.Airport">
     insert into airports (airportsId, name, code, 
-      lon, lat, msl, type
+      lon, lat, msl, type,amount
       )
     values (#{airportsId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{lon,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{msl,jdbcType=DOUBLE}, #{type,jdbcType=INTEGER}
+      #{lon,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{msl,jdbcType=DOUBLE}, #{type,jdbcType=INTEGER},#{amount,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.kg.fss.entity.Airport">
@@ -58,6 +59,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="amount != null">
+        amount,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="airportsId != null">
@@ -80,6 +84,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -104,6 +111,9 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
+      <if test="amount != null">
+        type = #{amount,jdbcType=INTEGER},
+      </if>
     </set>
     where airportsId = #{airportsId,jdbcType=INTEGER}
   </update>
@@ -114,7 +124,8 @@
       lon = #{lon,jdbcType=DOUBLE},
       lat = #{lat,jdbcType=DOUBLE},
       msl = #{msl,jdbcType=DOUBLE},
-      type = #{type,jdbcType=INTEGER}
+      type = #{type,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=INTEGER}
     where airportsId = #{airportsId,jdbcType=INTEGER}
   </update>
 </mapper>

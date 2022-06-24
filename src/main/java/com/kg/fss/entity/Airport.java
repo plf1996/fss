@@ -18,6 +18,7 @@ public class Airport implements Serializable {
     private Double msl;
 
     private Integer type;
+    private Integer amount;
 
     private static final long serialVersionUID = 1L;
 
@@ -72,12 +73,18 @@ public class Airport implements Serializable {
     public Integer getType() {
         return type;
     }
+    public Integer getAmount() {
+        return amount;
+    }
 
     public void setType(Integer type) {
         this.type = type;
     }
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
-    public Airport(Integer airportsId, String name, String code, Double lon, Double lat, Double msl, Integer type) {
+    public Airport(Integer airportsId, String name, String code, Double lon, Double lat, Double msl, Integer type, Integer amount) {
         this.airportsId = airportsId;
         this.name = name;
         this.code = code;
@@ -85,6 +92,7 @@ public class Airport implements Serializable {
         this.lat = lat;
         this.msl = msl;
         this.type = type;
+        this.amount = amount;
     }
 
     public Airport() {
