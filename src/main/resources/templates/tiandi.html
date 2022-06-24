@@ -281,7 +281,7 @@ function loadRecRestrictAreaData() {
                         semiMinorAxis: result[item].radius,
                         semiMajorAxis: result[item].radius,
                         height: 200,
-                        material : Cesium.Color.RED.withAlpha(0.5),
+                        material : Cesium.Color.YELLOW.withAlpha(0.5),
                         outline: true, // height must be set for outline to display
                         heightReference:Cesium.HeightReference.CLAMP_TO_GROUND,
                     },
@@ -316,7 +316,7 @@ function loadRecRestrictAreaData() {
                     polygon : {
                         hierarchy : Cesium.Cartesian3.fromDegreesArray(filtered),
                         height : 300,
-                        material : Cesium.Color.RED.withAlpha(0.5),
+                        material : Cesium.Color.YELLOW.withAlpha(0.5),
                         outline : true,
                         outlineColor : Cesium.Color.BLACK,
                         //heightReference:Cesium.HeightReference.CLAMP_TO_GROUND,
@@ -473,7 +473,38 @@ function removeRecRestrictAreaData() {
             }});
     }
 
+function loadServiceStationData() {
+    $.ajax({
+        url:'/serviceStation/all',
+        type:'get',
+        datatype:"json",
+        async:"false",
+        success:function(result){
+            for (var item in result){
+                var serviceStation = viewer.entities.add({
+                    position: Cesium.Cartesian3.fromDegrees(result[item].lon, result[item].lat),
+                    name :result[item].name,
+                    ellipse: {
+                        semiMinorAxis: result[item].radius,
+                        semiMajorAxis: result[item].radius,
+                        height: 200,
+                        material : Cesium.Color.RED.withAlpha(0.5),
+                        outline: true, // height must be set for outline to display
+                        outlineColor : Cesium.Color.BLUE,
+                        outlineWidth : 3,
+                        heightReference:Cesium.HeightReference.CLAMP_TO_GROUND,
+                        fill:false
+                    },
 
+
+
+                });
+
+
+            }
+        }});
+
+}
     function removenavStationData(){
         viewer.entities.removeAll();
     }

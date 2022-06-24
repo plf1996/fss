@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kg.fss.dao.ServiceStationMapper">
+  <resultMap id="BaseResultMap" type="com.kg.fss.entity.ServiceStation">
+    <id column="idserviceStation" jdbcType="INTEGER" property="idserviceStation" />
+    <result column="lon" jdbcType="DOUBLE" property="lon" />
+    <result column="lat" jdbcType="DOUBLE" property="lat" />
+    <result column="radius" jdbcType="INTEGER" property="radius" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    idserviceStation, lon, lat, radius, name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from serviceStation
+    where idserviceStation = #{idserviceStation,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllServiceStation" resultType="com.kg.fss.entity.ServiceStation">
+     select * from serviceStation
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from serviceStation
+    where idserviceStation = #{idserviceStation,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kg.fss.entity.ServiceStation">
+    insert into serviceStation (idserviceStation, lon, lat, 
+      radius, name)
+    values (#{idserviceStation,jdbcType=INTEGER}, #{lon,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, 
+      #{radius,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kg.fss.entity.ServiceStation">
+    insert into serviceStation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idserviceStation != null">
+        idserviceStation,
+      </if>
+      <if test="lon != null">
+        lon,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="radius != null">
+        radius,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idserviceStation != null">
+        #{idserviceStation,jdbcType=INTEGER},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="radius != null">
+        #{radius,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kg.fss.entity.ServiceStation">
+    update serviceStation
+    <set>
+      <if test="lon != null">
+        lon = #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="radius != null">
+        radius = #{radius,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where idserviceStation = #{idserviceStation,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kg.fss.entity.ServiceStation">
+    update serviceStation
+    set lon = #{lon,jdbcType=DOUBLE},
+      lat = #{lat,jdbcType=DOUBLE},
+      radius = #{radius,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR}
+    where idserviceStation = #{idserviceStation,jdbcType=INTEGER}
+  </update>
+</mapper>

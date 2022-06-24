@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.easyui.min.js}"></script>
 </head>
 <body>
-<p>
-    服务覆盖
-</p>
+
+
+<div id="sys" data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+    <a href="javascript:top.loadServiceStationData()" class="easyui-linkbutton" iconCls="icon-reload">加载现有服务站</a>
+    <a href="javascript:" class="easyui-linkbutton" iconCls="icon-undo">移除服务站数据</a>
+    <a href="javascript:addUser()" class="easyui-linkbutton" iconCls="icon-add">添加服务站数据</a>
+    <!-- class="easyui-datagrid"-->
+
+</div>
 </body>
 </html>
