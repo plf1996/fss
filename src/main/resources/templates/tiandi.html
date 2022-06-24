@@ -508,6 +508,9 @@ function loadServiceStationData() {
     function removenavStationData(){
         viewer.entities.removeAll();
     }
+    function removeServiceStationData(){
+        viewer.entities.removeAll();
+    }
     function pagerFilter(data){
         if (typeof data.length == 'number' && typeof data.splice == 'function'){	// is array
             data = {
