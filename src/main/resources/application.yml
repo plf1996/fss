@@ -3,9 +3,13 @@ spring:
     static-path-pattern: /static/**
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: '@Pan874974'
+#    url: jdbc:mysql://39.106.78.112:3306/fss?useUnicode=true&characterEncoding=utf8
     username: root
-    password: '@Pan874974'
-    url: jdbc:mysql://39.106.78.112:3306/fss?useUnicode=true&characterEncoding=utf8
+    password: 123456
+    url: jdbc:mysql://localhost:3306/fss?useUnicode=true&characterEncoding=utf8
+
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
