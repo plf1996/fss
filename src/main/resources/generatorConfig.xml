@@ -78,13 +78,22 @@
             <!--&lt;!&ndash;区分大小写，与数据库保持一致&ndash;&gt;-->
             <!--<property name= "useActualColumnNames" value= "true"/>-->
         <!--</table>-->
-        <table tableName="serviceStation" domainObjectName="ServiceStation"
+
+        <!--<table tableName="serviceStation" domainObjectName="ServiceStation"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;区分大小写，与数据库保持一致&ndash;&gt;-->
+            <!--<property name= "useActualColumnNames" value= "true"/>-->
+        <!--</table>  -->
+        <table tableName="city" domainObjectName="City"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <!--区分大小写，与数据库保持一致-->
             <property name= "useActualColumnNames" value= "true"/>
         </table>
+
         <!--<table tableName="airline" domainObjectName="Airline"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->

@@ -359,6 +359,7 @@ function loadRecRestrictAreaData() {
             datatype:"json",
             async:"false",
             success:function(result){
+
                 var str = "";
                 var tbody = document.getElementById("airportManage").contentWindow.document.getElementById('airportsbody');
                 //var tbody = document.getElementById("airportManage").document.getElementById('airportsbody');
@@ -370,6 +371,7 @@ function loadRecRestrictAreaData() {
                         "<td>" + result[item].lat + "</td>" +
                         "<td>" + result[item].msl + "</td>" +
                         "<td>" + result[item].type + "</td>" +
+                        "<td>" + result[item].amount + "</td>" +
                         "</tr>";
                     var entity = new Cesium.Entity({
                         id:result[item].airportsId,
@@ -518,6 +520,7 @@ function loadServiceStationData() {
                 rows: data
             }
         }
+
         var dg = $(this);
         var opts = dg.datagrid('options');
         var pager = dg.datagrid('getPager');
@@ -563,6 +566,74 @@ function loadServiceStationData() {
                 closable:true,
             });
         }
+    }
+
+    function sleep(d){
+
+        for(var t = Date.now();Date.now() - t <= d;);
+    }
+
+
+
+
+    function loadCityData() {
+        $.ajax({
+            url:'/city/all',
+            type:'get',
+            datatype:"json",
+            async:"false",
+            success:function(result){
+                for (var item in result) {
+
+                    var entity = new Cesium.Entity({
+                        id: result[item].idcity,
+                        name: result[item].cityName,
+                        show: true,
+                        position: Cesium.Cartesian3.fromDegrees(result[item].cityLat, result[item].cityLon),
+                        point: new Cesium.PointGraphics({
+                            show: false,
+                            pixelSize: 5,
+                            heightReference: Cesium.HeightReference.NONE,
+                            color: new Cesium.Color(255, 255, 0, 1),
+                            outlineColor: new Cesium.Color(0, 0, 0, 0),
+                            outlineWidth: 1,
+                            scaleByDistance: new Cesium.NearFarScalar(0, 1, 5e10, 1),
+                            translucencyByDistance: new Cesium.NearFarScalar(0, 1, 5e10, 1),
+                            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 4.8e10),
+
+                        }),
+                        ellipse: {
+                            semiMinorAxis: 100000,
+                            semiMajorAxis: 100000,
+                            height: 200,
+                            material : Cesium.Color.RED.withAlpha(0.5),
+                            outline: true, // height must be set for outline to display
+                            outlineColor : Cesium.Color.BLUE,
+                            outlineWidth : 3,
+                            heightReference:Cesium.HeightReference.CLAMP_TO_GROUND,
+                            fill:false
+                        },
+
+                        label: {
+                            text: result[item].cityName,
+                            font: '10pt monospace',
+                            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                            outlineWidth: 1,
+                            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                            pixelOffset: new Cesium.Cartesian2(0, -9),
+                        },
+                        billboard: {
+                            image: "../static/image/dingwei.png",
+                            width: 16,
+                            height: 16,
+                        },
+                    });
+                    viewer.entities.add(entity);
+
+                }
+
+
+            }});
     }
 
     function createFrame(url){

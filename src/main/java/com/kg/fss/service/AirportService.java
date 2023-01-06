@@ -17,5 +17,11 @@ public class AirportService {
     public List<Airport> getAllAirport(){
         return airportMapper.selectAllAirport();
     }
+    public int insert(Airport airport){
+        return airportMapper.insert(airport);
+    }
+    public int update(Airport airport){
+        return airportMapper.updateByPrimaryKey(airport);
+    }
 
 }

@@ -12,20 +12,49 @@
 
 <div class="easyui-accordion" style="width:100%;height:800px;">
     <div title="需求聚集" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:33%;">
-        <a href="javascript:testmsg()" class="easyui-linkbutton" iconCls="icon-reload">开始寻址</a>
+        <a href="javascript:xuqiujuji()" class="easyui-linkbutton" iconCls="icon-reload">开始寻址</a>
     </div>
     <div title="连续动态" data-options="iconCls:'icon-help'" style="padding:33%;">
-        <a href="javascript:testmsg()" class="easyui-linkbutton" iconCls="icon-reload">开始寻址</a>
+        <a href="javascript:lianxudongtai()" class="easyui-linkbutton" iconCls="icon-reload">开始寻址</a>
+        <div id="p" class="easyui-progressbar" style="width:300px;"></div>
     </div>
     <div title="紧急响应" data-options="iconCls:'icon-search'" style="padding:33%;">
-        <a href="javascript:testmsg()" class="easyui-linkbutton" iconCls="icon-reload">开始寻址</a>
+        <a href="javascript:jinjixiangying()" class="easyui-linkbutton" iconCls="icon-reload">开始寻址</a>
     </div>
 </div>
 
 </body>
 <script type="text/javascript">
-    function testmsg() {
-        $.messager.alert("系统提示","开始计算");
+    function start(){
+        var value = $('#p').progressbar('getValue');
+        if (value < 100){
+            value += Math.floor(Math.random() * 5);
+            $('#p').progressbar('setValue', value);
+            setTimeout(arguments.callee, 200);
+        }
+    };
+
+    function alert_autoClose(title,msg,icon){
+        var interval;
+        var time=1000;
+        var x=1;  //设置时间2s
+        $.messager.alert(title,msg,icon,function(){});
+        interval=setInterval(fun,time);
+        function fun(){
+            --x;
+            if(x==0){
+                clearInterval(interval);
+                $(".messager-body").window('close');
+            }
+        };
+    }
+
+    function lianxudongtai() {
+        top.removeServiceStationData();
+        /*$.messager.alert("系统提示","开始计算");*/
+        alert_autoClose("系统提示","开始计算","");
+        top.loadCityData();
+        start();
     }
 </script>
 </html>
