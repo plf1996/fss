@@ -12,7 +12,7 @@
 
 
         function addAirport(){
-            $("#dlg").dialog("open").dialog("setTitle","添加导航台信息");
+            $("#dlg").dialog("open").dialog("setTitle","添加机场信息");
             url="/airport/save";
         }
 
@@ -108,7 +108,9 @@
             </tr>
             <tr>
                 <td>机场类型：</td>
-                <td><input type="text" id="type" name="type" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+                <td>
+                    <select class="easyui-combobox" name="type"><option value="0">军用机场</option><option value="1">民用机场</option><option value="2">军民合用机场</option><option value="3">其他机场</option></select>
+                </td>
             </tr>
             <tr>
                 <td>飞行量：</td>

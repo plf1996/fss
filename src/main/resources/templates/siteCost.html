@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/easyui/jquery.easyui.min.js}"></script>
 </head>
 <body>
-<p>
-    选址成本
-</p>
+<div id="dlg" class="easyui-dialog" style="width: 400px;height: 250px;padding: 10px 20px"  buttons="#dlg-buttons">
+    <form id="fm" method="post">
+        <table>
+            <tr>
+                <td>城镇人口：</td>
+                <td><input type="text" id="name" name="name" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>城镇面积：</td>
+                <td><input type="text" id="code" name="code" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+            </tr>
+
+            <tr>
+                <td>服务半径：</td>
+                <td><input type="text" id="lon" name="lon" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+            </tr>
+            <tr>
+                <td>机场数量：</td>
+                <td><input type="text" id="lat" name="lat" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+            </tr>
+            <tr>
+                <td>城镇GDP：</td>
+                <td><input type="text" id="msl" name="msl" class="easyui-validatebox"  required="true"/>&nbsp;<font color="red">*</font></td>
+            </tr>
+
+            <tr>
+                <td>地区飞行量：</td>
+                <td><input type="text" id="amount" name="amount" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:saveAirport()" class="easyui-linkbutton" iconCls="icon-ok">开始测算</a>
+    <a href="javascript:closeAirportDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+</div>
 </body>
 </html>
