@@ -56,4 +56,6 @@ public class City implements Serializable {
 
     public City() {
     }
+
+
 }

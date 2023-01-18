@@ -576,7 +576,79 @@ function loadServiceStationData() {
 
 
 
-    function loadCityData() {
+    function lianxudongtai(radius) {
+
+        $.ajax({
+            url:'/city/lianxudongtai',
+            data:{radius:radius},
+            type:'get',
+            datatype:"json",
+            async:"false",
+            success:function(result){
+                var str="";
+                var tbody = document.getElementById("siteSelection").contentWindow.document.getElementById('airportsInCityBody');
+                for (var item in result) {
+                    if ((result[item].count!=0)&&item<15) {
+                        str += "<tr>" +
+                            "<td align='center'>" + result[item].city.cityName + "</td>" +
+                            "<td align='center'>" + result[item].city.cityLon + "</td>" +
+                            "<td align='center'>" + result[item].city.cityLat + "</td>" +
+                            "<td align='center'>" + result[item].count + "</td>" +
+                            "</tr>";
+                        var entity = new Cesium.Entity({
+                            id: result[item].city.idcity,
+                            name: result[item].city.cityName,
+                            show: true,
+                            position: Cesium.Cartesian3.fromDegrees(result[item].city.cityLat, result[item].city.cityLon),
+                            point: new Cesium.PointGraphics({
+                                show: false,
+                                pixelSize: 5,
+                                heightReference: Cesium.HeightReference.NONE,
+                                color: new Cesium.Color(255, 255, 0, 1),
+                                outlineColor: new Cesium.Color(0, 0, 0, 0),
+                                outlineWidth: 1,
+                                scaleByDistance: new Cesium.NearFarScalar(0, 1, 5e10, 1),
+                                translucencyByDistance: new Cesium.NearFarScalar(0, 1, 5e10, 1),
+                                distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 4.8e10),
+
+                            }),
+                            ellipse: {
+                                semiMinorAxis: radius,
+                                semiMajorAxis: radius,
+                                height: 200,
+                                material: Cesium.Color.RED.withAlpha(0.5),
+                                outline: true, // height must be set for outline to display
+                                outlineColor: Cesium.Color.BLUE,
+                                outlineWidth: 3,
+                                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+                                fill: false
+                            },
+
+                            label: {
+                                text: result[item].city.cityName,
+                                font: '10pt monospace',
+                                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                                outlineWidth: 1,
+                                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                                pixelOffset: new Cesium.Cartesian2(0, -9),
+                            },
+                            billboard: {
+                                image: "../static/image/dingwei.png",
+                                width: 16,
+                                height: 16,
+                            },
+                        });
+                        viewer.entities.add(entity);
+
+                    }
+                    tbody.innerHTML = str;
+                }
+            }});
+    }
+
+
+    function loadCityData(radius) {
+
         $.ajax({
             url:'/city/all',
             type:'get',
@@ -603,8 +675,8 @@ function loadServiceStationData() {
 
                         }),
                         ellipse: {
-                            semiMinorAxis: 100000,
-                            semiMajorAxis: 100000,
+                            semiMinorAxis: radius,
+                            semiMajorAxis: radius,
                             height: 200,
                             material : Cesium.Color.RED.withAlpha(0.5),
                             outline: true, // height must be set for outline to display
@@ -635,6 +707,7 @@ function loadServiceStationData() {
 
             }});
     }
+
 
     function createFrame(url){
         return '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';

@@ -15,4 +15,7 @@ public class CityService {
     public List<City> selectAllCity(){
         return cityMapper.selectAllCity();
     }
+    public City selectByPrimaryKey(int id){
+        return cityMapper.selectByPrimaryKey(id);
+    }
 }
