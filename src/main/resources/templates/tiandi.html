@@ -374,10 +374,10 @@ function loadRecRestrictAreaData() {
                         "<td>" + result[item].amount + "</td>" +
                         "</tr>";
                     var entity = new Cesium.Entity({
-                        id:result[item].airportsId,
+                        id:"airport"+result[item].airportsId,
                         name:result[item].name,
                         show:true,
-                        position:Cesium.Cartesian3.fromDegrees(result[item].lat,result[item].lon),
+                        position:Cesium.Cartesian3.fromDegrees(result[item].lon,result[item].lat),
                         point:new Cesium.PointGraphics({
                             show:false,
                             pixelSize :  5,
@@ -439,10 +439,10 @@ function removeRecRestrictAreaData() {
                         "<td>" + result[item].navtype + "</td>" +
                         "</tr>";
                     var entity = new Cesium.Entity({
-                        id:result[item].airportsId,
+                        id:"navStation"+result[item].stationId,
                         name:result[item].stationName,
                         show:true,
-                        position:Cesium.Cartesian3.fromDegrees(result[item].navlat,result[item].navlon),
+                        position:Cesium.Cartesian3.fromDegrees(result[item].navlon,result[item].navlat),
                         point:new Cesium.PointGraphics({
                             show:false,
                             pixelSize :  5,
@@ -596,10 +596,10 @@ function loadServiceStationData() {
                             "<td align='center'>" + result[item].count + "</td>" +
                             "</tr>";
                         var entity = new Cesium.Entity({
-                            id: result[item].city.idcity,
+                            id: 'city'+result[item].city.idcity,
                             name: result[item].city.cityName,
                             show: true,
-                            position: Cesium.Cartesian3.fromDegrees(result[item].city.cityLat, result[item].city.cityLon),
+                            position: Cesium.Cartesian3.fromDegrees(result[item].city.cityLon,result[item].city.cityLat),
                             point: new Cesium.PointGraphics({
                                 show: false,
                                 pixelSize: 5,
@@ -644,6 +644,7 @@ function loadServiceStationData() {
                     tbody.innerHTML = str;
                 }
             }});
+
     }
 
 

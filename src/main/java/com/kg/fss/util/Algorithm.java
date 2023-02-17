@@ -11,7 +11,7 @@ public class Algorithm {
     /**
      * 默认地球半径
      */
-    private static double EARTH_RADIUS = 6371000;//赤道半径(单位m)
+    private static double EARTH_RADIUS = 6378000;//赤道半径(单位m)
 
     /**
      * 转化为弧度(rad)
@@ -54,7 +54,8 @@ public class Algorithm {
             List<Airport> inairport = new ArrayList<>();
             for (Airport airport: airportList
                  ) {
-                if (GetDistance(city.getCityLon(), city.getCityLat(), airport.getLon(), airport.getLat()) < radius) {
+                double distance = GetDistance(city.getCityLon(), city.getCityLat(), airport.getLon(), airport.getLat());
+                if ( distance< radius) {
                     inairport.add(airport);
                 }
             }
@@ -70,6 +71,54 @@ public class Algorithm {
         return airportInCities;
     }
 
+    /**
+     *
+     * @param cityList  城镇列表
+     * @param airportList  机场列表
+     * @param radius 半径
+     * @return 返回城镇在当前半径下所包含的机场列表
+     */
+    public static List<AirportInCity> lianxudongtai(List<City> cityList, List<Airport> airportList, int radius){
+        List<Airport> airportContent = new ArrayList<>();
+        List<City> cityContent = new ArrayList<>();
+
+        //复制
+        for (int i=0;i<cityList.size();i++){
+            City city = cityList.get(i);
+            cityContent.add(city);
+        }
+        for (int j=0;j<airportList.size();j++){
+            Airport airport = airportList.get(j);
+            airportContent.add(airport);
+        }
+
+        List<AirportInCity> fangan = new ArrayList<>();
+        while(airportContent.size()>0){
+            City tempCity = new City();
+            List<Airport> tempAirportList = new ArrayList<Airport>();
+            //寻找当前半径中哪个城市所包含的机场数量最多
+            List<AirportInCity> templist = Algorithm.GetAirportCount(cityContent,airportContent,radius);
+            //将所选择的城市和机场加入数据结构中
+            if(templist.size()>0){
+                fangan.add(templist.get(0));
+                 tempCity = templist.get(0).getCity();
+                tempAirportList = templist.get(0).getAirportList();
+            }
+
+            //将已经选择的城市和机场从列表中抹除
+            if (cityContent.contains(tempCity)){
+                cityContent.remove(tempCity);
+            }
+
+            for (Airport airport1:tempAirportList) {
+                if (airportContent.contains(airport1)){
+                    airportContent.remove(airport1);
+                }
+            }
+
+        }
+        return fangan;
+    }
 
 }
 

@@ -37,7 +37,7 @@ public class CityController {
     public List<AirportInCity> getAirportInCity(Model model, int radius) {
         List<Airport> airportList = airportService.getAllAirport();
         List<City> cityList = cityService.selectAllCity();
-        List<AirportInCity> airportInCityList = Algorithm.GetAirportCount(cityList,airportList,radius);
+        List<AirportInCity> airportInCityList = Algorithm.lianxudongtai(cityList,airportList,radius);
         model.addAttribute("airportInCityList", airportInCityList);
         return airportInCityList;
     }

@@ -20,7 +20,7 @@ public class loginController {
     public String userlogin(User user){
         int result = userService.login(user.getUserName(),user.getPwd());
         if(result==1) {
-            return "tiandi";
+            return "/index/tiandi";
         }
         return "login";
         }
