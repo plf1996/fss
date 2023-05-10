@@ -11,7 +11,7 @@
         var url;
 
         function addAirport(){
-            $("#dlg").dialog("open").dialog("setTitle","添加机场信息");
+            $("#dlg").dialog("open").dialog("setTitle","Add airport information");
             url="/airport/save";
         }
 
@@ -24,12 +24,12 @@
                 success:function(result){
                     var result=eval('('+result+')');
                     if(result.success){
-                        $.messager.alert("系统提示","保存成功!");
+                        $.messager.alert("system prompt","save successfully!");
                         resetValue();
                         $("#dlg").dialog("close");
                         $("#dg").datagrid("reload");
                     }else{
-                        $.messager.alert("系统提示","保存失败！");
+                        $.messager.alert("system prompt","fail to save！");
                         return;
                     }
                 }
@@ -54,9 +54,9 @@
 <body>
 
 <div id="sys" data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-    <a href="javascript:top.loadAirportData()" class="easyui-linkbutton" iconCls="icon-reload">加载机场数据</a>
-    <a href="javascript:top.removeAirportData()" class="easyui-linkbutton" iconCls="icon-undo">移除机场数据</a>
-    <a href="javascript:addAirport()" class="easyui-linkbutton" iconCls="icon-add">添加机场数据</a>
+    <a href="javascript:top.loadAirportData()" class="easyui-linkbutton" iconCls="icon-reload">loading data</a>
+    <a href="javascript:top.removeAirportData()" class="easyui-linkbutton" iconCls="icon-undo">remove data</a>
+    <a href="javascript:addAirport()" class="easyui-linkbutton" iconCls="icon-add">add data</a>
     <!-- class="easyui-datagrid"-->
     <table id="airportsdg" title="机场数据信息" style="width:100%;height:100%" data-options="
 				rownumbers:true,
@@ -66,13 +66,13 @@
 				pageSize:10">
         <thead>
         <tr>
-            <th field="name" width="150" align="center">机场名称</th>
-            <th field="code" width="80" align="center">机场代码</th>
-            <th field="lon" width="80" align="center">经度</th>
-            <th field="lat" width="80" align="center">纬度</th>
-            <th field="msl" width="80" align="center">标高</th>
-            <th field="type" width="80" align="center">类型</th>
-            <th field="type" width="80" align="center">飞行量</th>
+            <th field="name" width="150" align="center">name</th>
+            <th field="code" width="80" align="center">code</th>
+            <th field="lon" width="80" align="center">longitude</th>
+            <th field="lat" width="80" align="center">latitude</th>
+            <th field="msl" width="80" align="center">elevation</th>
+            <th field="type" width="80" align="center">type</th>
+            <th field="type" width="80" align="center">mount</th>
         </tr>
         </thead>
         <tbody id="airportsbody"></tbody>
@@ -83,36 +83,36 @@
     <form id="fm" method="post">
         <table>
             <tr>
-                <td>机场名称：</td>
+                <td>airport name：</td>
                 <td><input type="text" id="name" name="name" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             </tr>
 
             <tr>
-                <td>机场代码：</td>
+                <td>airport code：</td>
                 <td><input type="text" id="code" name="code" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
 
             <tr>
-                <td>机场经度：</td>
+                <td>airport longitude：</td>
                 <td><input type="text" id="lon" name="lon" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>机场纬度：</td>
+                <td>airport latitude：</td>
                 <td><input type="text" id="lat" name="lat" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>机场标高：</td>
+                <td>airport elevation：</td>
                 <td><input type="text" id="msl" name="msl" class="easyui-validatebox"  required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>机场类型：</td>
+                <td>airport type：</td>
                 <td>
                     <select class="easyui-combobox" name="type"><option value="0">军用机场</option><option value="1">民用机场</option><option value="2">军民合用机场</option><option value="3">其他机场</option></select>
                 </td>
             </tr>
             <tr>
-                <td>飞行量：</td>
+                <td>airport amount：</td>
                 <td><input type="text" id="amount" name="amount" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
 
@@ -120,8 +120,8 @@
     </form>
 
     <div id="dlg-buttons">
-        <a href="javascript:saveAirport()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
-        <a href="javascript:closeAirportDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+        <a href="javascript:saveAirport()" class="easyui-linkbutton" iconCls="icon-ok">save</a>
+        <a href="javascript:closeAirportDialog()" class="easyui-linkbutton" iconCls="icon-cancel">close</a>
     </div>
 </div>
 

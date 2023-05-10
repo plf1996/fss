@@ -10,7 +10,7 @@
     <script type="text/javascript">
         var url;
         function addnavStation(){
-            $("#dlg").dialog("open").dialog("setTitle","添加导航台信息");
+            $("#dlg").dialog("open").dialog("setTitle","Add navigation station information");
             url="/navStation/save";
         }
 
@@ -23,12 +23,12 @@
                 success:function(result){
                     var result=eval('('+result+')');
                     if(result.success){
-                        $.messager.alert("系统提示","保存成功!");
+                        $.messager.alert("system prompt","save successfully!");
                         resetValue();
                         $("#dlg").dialog("close");
                         $("#dg").datagrid("reload");
                     }else{
-                        $.messager.alert("系统提示","保存失败！");
+                        $.messager.alert("system prompt","fail to save！");
                         return;
                     }
                 }
@@ -54,11 +54,11 @@
 </head>
 <body>
 <div id="navStationContent" data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-    <a href="javascript:top.loadnavStationData()" class="easyui-linkbutton" iconCls="icon-reload">加载导航台数据</a>
-    <a href="javascript:top.removenavStationData()" class="easyui-linkbutton" iconCls="icon-undo">移除导航台数据</a>
-    <a href="javascript:addnavStation()" class="easyui-linkbutton" iconCls="icon-add">添加导航台数据</a>
+    <a href="javascript:top.loadnavStationData()" class="easyui-linkbutton" iconCls="icon-reload">loading data</a>
+    <a href="javascript:top.removenavStationData()" class="easyui-linkbutton" iconCls="icon-undo">remove data</a>
+    <a href="javascript:addnavStation()" class="easyui-linkbutton" iconCls="icon-add">add data</a>
     <!-- class="easyui-datagrid"-->
-    <table id="airportsdg" title="导航台数据信息" style="width:100%;height:100%" data-options="
+    <table id="airportsdg" title="Navigation station data information" style="width:100%;height:100%" data-options="
 				rownumbers:true,
 				singleSelect:true,
 				autoRowHeight:false,
@@ -66,13 +66,13 @@
 				pageSize:10">
         <thead>
         <tr>
-            <th field="stationName" width="150" align="center">导航台名称</th>
-            <th field="navlon" width="80" align="center">导航台经度</th>
-            <th field="navlat" width="80" align="center">导航台纬度经度</th>
-            <th field="code" width="80" align="center">三字码</th>
+            <th field="stationName" width="150" align="center">station name</th>
+            <th field="navlon" width="80" align="center">station longitude</th>
+            <th field="navlat" width="80" align="center">station latitude</th>
+            <th field="code" width="80" align="center">station code</th>
             <th field="ch" width="80" align="center">CH</th>
-            <th field="freq" width="80" align="center">电台频率</th>
-            <th field="navtype" width="80" align="center">导航台类型</th>
+            <th field="freq" width="80" align="center">station frequency</th>
+            <th field="navtype" width="80" align="center">station type</th>
         </tr>
         </thead>
         <tbody id="navStationbody"></tbody>
@@ -84,32 +84,32 @@
     <form id="fm" method="post">
         <table>
             <tr>
-                <td>导航台名称：</td>
+                <td>station name：</td>
                 <td><input type="text" id="stationName" name="stationName" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr>
-                <td>经度：</td>
+                <td>station longitude：</td>
                 <td><input type="text" id="navlon" name="navlon" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>纬度：</td>
+                <td>station latitude：</td>
                 <td><input type="text" id="navlat" name="navlat" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>三字码：</td>
+                <td>station code：</td>
                 <td><input type="text" id="code" name="code" class="easyui-validatebox"  required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>国际编码：</td>
+                <td>CH：</td>
                 <td><input type="text" id="ch" name="ch" class="easyui-validatebox" required="true" />&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>通信频率：</td>
+                <td>station frequency：</td>
                 <td><input type="text" id="freq" name="freq" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
             <tr>
-                <td>类型：</td>
+                <td>station type：</td>
                 <td><input type="text" id="type" name="type" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
             </tr>
 
@@ -117,8 +117,8 @@
     </form>
 
     <div id="dlg-buttons">
-        <a href="javascript:savenavStation()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
-        <a href="javascript:closenavStationDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+        <a href="javascript:savenavStation()" class="easyui-linkbutton" iconCls="icon-ok">save</a>
+        <a href="javascript:closenavStationDialog()" class="easyui-linkbutton" iconCls="icon-cancel">close</a>
     </div>
 </div>
 

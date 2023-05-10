@@ -44,21 +44,21 @@
 <body >
 
 <div class="easyui-layout" style="width:40%;height:100%;float: left;">
-    <div data-options="region:'west',split:true" title="导航页" style="width:15%;">
-        <a href="javascript:openTab('机场数据','airportManage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">机场数据</a>
-        <a href="javascript:openTab('导航台数据','navigationStation','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">导航台数据</a>
-        <a href="javascript:openTab('限制区数据','restrictedArea','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">限制区数据</a>
-        <a href="javascript:openTab('fss选址','siteSelection','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">fss选址</a>
-        <a href="javascript:openTab('fss服务覆盖','serviceCoverage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">fss服务覆盖</a>
-        <a href="javascript:openTab('选址成本','siteCost','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">选址成本</a>
+    <div data-options="region:'west',split:true" title="导航页" style="width:21%;">
+        <a href="javascript:openTab('airport data','airportManage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">airport data</a>
+        <a href="javascript:openTab('navigation station data','navigationStation','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">navigation station data</a>
+        <a href="javascript:openTab('restricted area data','restrictedArea','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">restricted area data</a>
+        <a href="javascript:openTab('site selection','siteSelection','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">site selection</a>
+        <a href="javascript:openTab('service Coverage','serviceCoverage','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">service Coverage</a>
+        <a href="javascript:openTab('site cost','siteCost','icon-writeblog')" class="easyui-linkbutton"  data-options="plain:true" style="width: 100%;">site cost</a>
 
 
     </div>
-    <div  data-options="region:'center',title:'主页',iconCls:'icon-ok'">
+    <div  data-options="region:'center',title:'index',iconCls:'icon-ok'">
         <div class="easyui-tabs" fit="true" border="false" id="tabs">
-            <div title="首页" data-options="iconCls:'icon-home'">
+            <div title="index" data-options="iconCls:'icon-home'">
                 <div align="center" style="padding-top: 150px">
-                    <font size="10" color="red">欢迎使用</font>
+                    <font size="10" color="red">welcome</font>
                 </div>
             </div>
         </div>
@@ -234,7 +234,7 @@
         return tdtUrl + 'mapservice/GetIcon?id={id}&tk='+ token;
     }
 
-    wtfs.initTDT([{"x":6,"y":1,"level":2,"boundBox":{"minX":90,"minY":0,"maxX":135,"maxY":45}},{"x":7,"y":1,"level":2,"boundBox":{"minX":135,"minY":0,"maxX":180,"maxY":45}},{"x":6,"y":0,"level":2,"boundBox":{"minX":90,"minY":45,"maxX":135,"maxY":90}},{"x":7,"y":0,"level":2,"boundBox":{"minX":135,"minY":45,"maxX":180,"maxY":90}},{"x":5,"y":1,"level":2,"boundBox":{"minX":45,"minY":0,"maxX":90,"maxY":45}},{"x":4,"y":1,"level":2,"boundBox":{"minX":0,"minY":0,"maxX":45,"maxY":45}},{"x":5,"y":0,"level":2,"boundBox":{"minX":45,"minY":45,"maxX":90,"maxY":90}},{"x":4,"y":0,"level":2,"boundBox":{"minX":0,"minY":45,"maxX":45,"maxY":90}},{"x":6,"y":2,"level":2,"boundBox":{"minX":90,"minY":-45,"maxX":135,"maxY":0}},{"x":6,"y":3,"level":2,"boundBox":{"minX":90,"minY":-90,"maxX":135,"maxY":-45}},{"x":7,"y":2,"level":2,"boundBox":{"minX":135,"minY":-45,"maxX":180,"maxY":0}},{"x":5,"y":2,"level":2,"boundBox":{"minX":45,"minY":-45,"maxX":90,"maxY":0}},{"x":4,"y":2,"level":2,"boundBox":{"minX":0,"minY":-45,"maxX":45,"maxY":0}},{"x":3,"y":1,"level":2,"boundBox":{"minX":-45,"minY":0,"maxX":0,"maxY":45}},{"x":3,"y":0,"level":2,"boundBox":{"minX":-45,"minY":45,"maxX":0,"maxY":90}},{"x":2,"y":0,"level":2,"boundBox":{"minX":-90,"minY":45,"maxX":-45,"maxY":90}},{"x":0,"y":1,"level":2,"boundBox":{"minX":-180,"minY":0,"maxX":-135,"maxY":45}},{"x":1,"y":0,"level":2,"boundBox":{"minX":-135,"minY":45,"maxX":-90,"maxY":90}},{"x":0,"y":0,"level":2,"boundBox":{"minX":-180,"minY":45,"maxX":-135,"maxY":90}}]);
+        wtfs.initTDT([{"x":6,"y":1,"level":2,"boundBox":{"minX":90,"minY":0,"maxX":135,"maxY":45}},{"x":7,"y":1,"level":2,"boundBox":{"minX":135,"minY":0,"maxX":180,"maxY":45}},{"x":6,"y":0,"level":2,"boundBox":{"minX":90,"minY":45,"maxX":135,"maxY":90}},{"x":7,"y":0,"level":2,"boundBox":{"minX":135,"minY":45,"maxX":180,"maxY":90}},{"x":5,"y":1,"level":2,"boundBox":{"minX":45,"minY":0,"maxX":90,"maxY":45}},{"x":4,"y":1,"level":2,"boundBox":{"minX":0,"minY":0,"maxX":45,"maxY":45}},{"x":5,"y":0,"level":2,"boundBox":{"minX":45,"minY":45,"maxX":90,"maxY":90}},{"x":4,"y":0,"level":2,"boundBox":{"minX":0,"minY":45,"maxX":45,"maxY":90}},{"x":6,"y":2,"level":2,"boundBox":{"minX":90,"minY":-45,"maxX":135,"maxY":0}},{"x":6,"y":3,"level":2,"boundBox":{"minX":90,"minY":-90,"maxX":135,"maxY":-45}},{"x":7,"y":2,"level":2,"boundBox":{"minX":135,"minY":-45,"maxX":180,"maxY":0}},{"x":5,"y":2,"level":2,"boundBox":{"minX":45,"minY":-45,"maxX":90,"maxY":0}},{"x":4,"y":2,"level":2,"boundBox":{"minX":0,"minY":-45,"maxX":45,"maxY":0}},{"x":3,"y":1,"level":2,"boundBox":{"minX":-45,"minY":0,"maxX":0,"maxY":45}},{"x":3,"y":0,"level":2,"boundBox":{"minX":-45,"minY":45,"maxX":0,"maxY":90}},{"x":2,"y":0,"level":2,"boundBox":{"minX":-90,"minY":45,"maxX":-45,"maxY":90}},{"x":0,"y":1,"level":2,"boundBox":{"minX":-180,"minY":0,"maxX":-135,"maxY":45}},{"x":1,"y":0,"level":2,"boundBox":{"minX":-135,"minY":45,"maxX":-90,"maxY":90}},{"x":0,"y":0,"level":2,"boundBox":{"minX":-180,"minY":45,"maxX":-135,"maxY":90}}]);
 
 
     var redPolygon = viewer.entities.add({
@@ -262,6 +262,7 @@
     };
 
 function loadAirportDataInhtml() {
+
 
 }
 
@@ -585,6 +586,7 @@ function loadServiceStationData() {
             datatype:"json",
             async:"false",
             success:function(result){
+                console.log(result);
                 var str="";
                 var tbody = document.getElementById("siteSelection").contentWindow.document.getElementById('airportsInCityBody');
                 for (var item in result) {
@@ -616,19 +618,22 @@ function loadServiceStationData() {
                                 semiMinorAxis: radius,
                                 semiMajorAxis: radius,
                                 height: 200,
-                                material: Cesium.Color.RED.withAlpha(0.5),
+                                /*material: Cesium.Color.RED.withAlpha(0.5),*/
+                                material: Cesium.Color.RED,
                                 outline: true, // height must be set for outline to display
-                                outlineColor: Cesium.Color.BLUE,
-                                outlineWidth: 3,
+                                outlineColor: Cesium.Color.WHITE,
+                                outlineWidth: 8,
+                                width: 10,
                                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
                                 fill: false
                             },
 
                             label: {
                                 text: result[item].city.cityName,
-                                font: '10pt monospace',
+                                font: '16pt monospace',
+                                color: new Cesium.Color(255, 255, 0, 1),
                                 style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-                                outlineWidth: 1,
+                                outlineWidth: 5,
                                 verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
                                 pixelOffset: new Cesium.Cartesian2(0, -9),
                             },
@@ -647,6 +652,90 @@ function loadServiceStationData() {
 
     }
 
+
+    function jinjixiangying(radius) {
+        console.log(radius);
+        $.ajax({
+            url:'/city/jinjixiangying',
+            data:{radius:radius},
+            type:'get',
+            datatype:"json",
+            async:"false",
+            success:function(result){
+                console.log(result);
+                var str="";
+                var tbody = document.getElementById("siteSelection").contentWindow.document.getElementById('airportsInCityBody1');
+                for (var item in result) {
+                    console.log('result='+result);
+                    if(result[item].city.cityName=='guangyuan'||result[item].city.cityName=='guangyuan'){
+                        console.log("进来广元和自贡了");
+                    }
+                     else if ((result[item].count!=0)&&item<15) {
+                        str += "<tr>" +
+                            "<td align='center'>" + result[item].city.cityName + "</td>" +
+                            "<td align='center'>" + result[item].city.cityLon + "</td>" +
+                            "<td align='center'>" + result[item].city.cityLat + "</td>" +
+                            "<td align='center'>" + result[item].count + "</td>" +
+                            "</tr>";
+                         var entity = new Cesium.Entity({
+                             id: 'city'+result[item].city.idcity,
+                             name: result[item].city.cityName,
+                             show: true,
+                             position: Cesium.Cartesian3.fromDegrees(result[item].city.cityLon,result[item].city.cityLat),
+                             point: new Cesium.PointGraphics({
+                                 show: false,
+                                 pixelSize: 5,
+                                 heightReference: Cesium.HeightReference.NONE,
+                                 color: new Cesium.Color(255, 255, 0, 1),
+                                 outlineColor: new Cesium.Color(0, 0, 0, 0),
+                                 outlineWidth: 1,
+                                 scaleByDistance: new Cesium.NearFarScalar(0, 1, 5e10, 1),
+                                 translucencyByDistance: new Cesium.NearFarScalar(0, 1, 5e10, 1),
+                                 distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 4.8e10),
+
+                             }),
+                             ellipse: {
+                                 semiMinorAxis: radius,
+                                 semiMajorAxis: radius,
+                                 height: 200,
+                                 /*material: Cesium.Color.RED.withAlpha(0.5),*/
+                                 material: Cesium.Color.RED,
+                                 outline: true, // height must be set for outline to display
+                                 outlineColor: Cesium.Color.WHITE,
+                                 outlineWidth: 8,
+                                 width: 10,
+                                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+                                 fill: false
+                             },
+
+                             label: {
+                                 text: result[item].city.cityName,
+                                 font: '16pt monospace',
+                                 color: new Cesium.Color(255, 255, 0, 1),
+                                 style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                                 outlineWidth: 5,
+                                 verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                                 pixelOffset: new Cesium.Cartesian2(0, -9),
+                             },
+                             billboard: {
+                                 image: "../static/image/dingwei.png",
+                                 width: 16,
+                                 height: 16,
+                             },
+                         });
+                        viewer.entities.add(entity);
+
+                    }
+                    tbody.innerHTML = str;
+                }
+            }});
+
+    }
+
+function getEntity(result,item,radius) {
+
+
+}
 
     function loadCityData(radius) {
 

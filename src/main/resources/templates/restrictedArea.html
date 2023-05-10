@@ -10,7 +10,7 @@
     <script type="text/javascript">
         var url;
         function addRecRestrictArea(){
-            $("#dlg").dialog("open").dialog("setTitle","添加限制区信息");
+            $("#dlg").dialog("open").dialog("setTitle","add restrict area information");
             url="/recRestrictArea/save";
         }
 
@@ -23,12 +23,12 @@
                 success:function(result){
                     var result=eval('('+result+')');
                     if(result.success){
-                        $.messager.alert("系统提示","保存成功!");
+                        $.messager.alert("system prompt","save successfully!");
                         resetValue();
                         $("#dlg").dialog("close");
                         $("#dg").datagrid("reload");
                     }else{
-                        $.messager.alert("系统提示","保存失败！");
+                        $.messager.alert("system prompt","fail to save！");
                         return;
                     }
                 }
@@ -46,9 +46,9 @@
 </head>
 <body>
 <div id="navStationContent" data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-    <a href="javascript:top.loadRecRestrictAreaData()" class="easyui-linkbutton" iconCls="icon-reload">加载限制区数据</a>
-    <a href="javascript:top.removeRecRestrictAreaData()" class="easyui-linkbutton" iconCls="icon-undo">移除限制区数据</a>
-    <a href="javascript:addRecRestrictArea()" class="easyui-linkbutton" iconCls="icon-add">添加限制区数据</a>
+    <a href="javascript:top.loadRecRestrictAreaData()" class="easyui-linkbutton" iconCls="icon-reload">loading data </a>
+    <a href="javascript:top.removeRecRestrictAreaData()" class="easyui-linkbutton" iconCls="icon-undo">remove data</a>
+    <a href="javascript:addRecRestrictArea()" class="easyui-linkbutton" iconCls="icon-add">add data</a>
     <!-- class="easyui-datagrid"-->
     <!--<table id="airportsdg" title="限制区数据信息" style="width:100%;height:100%" data-options="-->
 				<!--rownumbers:true,-->
@@ -109,8 +109,8 @@
     </form>
 
     <div id="dlg-buttons">
-        <a href="javascript:savenavStation()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
-        <a href="javascript:closenavStationDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+        <a href="javascript:savenavStation()" class="easyui-linkbutton" iconCls="icon-ok">save</a>
+        <a href="javascript:closenavStationDialog()" class="easyui-linkbutton" iconCls="icon-cancel">close</a>
     </div>
 </div>
 

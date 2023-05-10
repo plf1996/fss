@@ -120,6 +120,56 @@ public class Algorithm {
         return fangan;
     }
 
+    /**
+     *
+     * @param cityList
+     * @param airportList
+     * @param radius
+     * @return
+     */
+    public static List<AirportInCity> jinjixiangying(List<City> cityList, List<Airport> airportList, int radius){
+        List<Airport> airportContent = new ArrayList<>();
+        List<City> cityContent = new ArrayList<>();
+
+        //复制
+        for (int i=0;i<cityList.size();i++){
+            City city = cityList.get(i);
+            cityContent.add(city);
+        }
+        for (int j=0;j<airportList.size();j++){
+            Airport airport = airportList.get(j);
+            airportContent.add(airport);
+        }
+
+        List<AirportInCity> fangan = new ArrayList<>();
+        int i=0;
+        while(airportContent.size()>0){
+            City tempCity = new City();
+            List<Airport> tempAirportList = new ArrayList<Airport>();
+            //寻找当前半径中哪个城市所包含的机场数量最多
+            List<AirportInCity> templist = Algorithm.GetAirportCount(cityContent,airportContent,radius);
+            //将所选择的城市和机场加入数据结构中
+
+            if(templist.size()>0){
+                fangan.add(templist.get(0));
+                tempCity = templist.get(0).getCity();
+                tempAirportList = templist.get(0).getAirportList();
+            }
+
+            //将已经选择的城市和机场从列表中抹除
+            if (cityContent.contains(tempCity)&&tempCity.getCityName()!="zigong"&&tempCity.getCityName()!="guangyuan"){
+                cityContent.remove(tempCity);
+            }
+
+            for (Airport airport1:tempAirportList) {
+                if (airportContent.contains(airport1)){
+                    airportContent.remove(airport1);
+                }
+            }
+
+        }
+        return fangan;
+    }
 }
 
 
