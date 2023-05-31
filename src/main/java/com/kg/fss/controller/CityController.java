@@ -51,4 +51,14 @@ public class CityController {
         model.addAttribute("airportInCityList", airportInCityList);
         return airportInCityList;
     }
+
+    @RequestMapping(value = "/xuqiujuji", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AirportInCity> getAirportInCity2(Model model, int radius) {
+        List<Airport> airportList = airportService.getAllAirport();
+        List<City> cityList = cityService.selectAllCity();
+        List<AirportInCity> airportInCityList = Algorithm.lianxudongtai(cityList,airportList,radius);
+        model.addAttribute("airportInCityList", airportInCityList);
+        return airportInCityList;
+    }
 }

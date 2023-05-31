@@ -11,9 +11,42 @@
 <body>
 
 <div class="easyui-accordion" style="width:100%;height:800px;">
-    <div title="xuqiujuji" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:33%;">
-        <a href="javascript:xuqiujuji()" class="easyui-linkbutton" iconCls="icon-reload">start</a>
+    <div title="xuqiujuji" data-options="iconCls:'icon-ok'" >
+        <form>
+            <table>
+                <tr>
+                    <!--输入服务半径-->
+
+                    <td>
+                        <a href="javascript:startXuqiujuji()" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">start</a>
+                    </td>
+                    <td> <div id="p2" class="easyui-progressbar" style="width:50px;display: none;"></div></td>
+                </tr>
+            </table>
+        </form>
+
+
+    <table id="airportsInCitydg2" title="airports in city dg2" style="width:100%;height:80%;" data-options="
+				rownumbers:true,
+				singleSelect:true,
+				autoRowHeight:false,
+				pagination:true,
+				pageSize:10">
+        <thead>
+        <tr>
+            Candidate site：
+            <th field="cityName" width="150" align="center">city name</th>
+            <th field="cityLon" width="80" align="center">longitude</th>
+            <th field="cityLat" width="80" align="center">latitude</th>
+            <th field="count" width="80" align="center">Number of airports in the region</th>
+
+        </tr>
+        </thead>
+        <tbody id="airportsInCityBody2"></tbody>
+    </table>
     </div>
+
+
     <div title="lianxudongtai" data-options="iconCls:'icon-help'" >
         <form>
             <table>
@@ -123,6 +156,17 @@
 
     };
 
+    function start2(){
+        document.getElementById("p2").style.display="block";
+        var value = $('#p2').progressbar('getValue');
+        if (value < 100){
+            value += Math.floor(Math.random() * 5);
+            $('#p2').progressbar('setValue', value);
+            setTimeout(arguments.callee, 30);
+        }
+
+    };
+
     function alert_autoClose(title,msg,icon){
         var interval;
         var time=1000;
@@ -151,7 +195,7 @@
     }
     function startJinjixiangying() {
 
-        var radius1 = (document.getElementById("radius1").value)*1000+Math.floor(Math.random()*10+1)*10000;
+        var radius1 = (document.getElementById("radius1").value)*1000;
         top.removeServiceStationData();
 
         alert_autoClose("system prompt","begin to calculate","");
@@ -160,5 +204,18 @@
         start1();
 
     }
+
+    function startXuqiujuji() {
+
+        //var radius = (document.getElementById("radius").value)*1000;
+        top.removeServiceStationData();
+
+        alert_autoClose("system prompt","begin to calculate","");
+
+        top.xuqiujuji(100000);
+        start2();
+
+    }
+
 </script>
 </html>
